@@ -44,7 +44,7 @@ function ChartDiv(props:ChartProps) {
               y: {
                 type: 'linear',
                 display: true,
-                position: 'right',
+                position: 'left',
                 min: -100,
                 max: -60,
                 
