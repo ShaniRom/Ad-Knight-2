@@ -14,9 +14,7 @@ function ChartDiv(props:ChartProps) {
 
   const chartRef:any = useRef(null);
 
-  console.log(wifiData);
-
-  console.log(wifiData);
+ 
   
   
 

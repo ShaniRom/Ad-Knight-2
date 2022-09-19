@@ -55,7 +55,7 @@ function App() {
 
     const { tempWifi, tempBLE } = handleFilterHeaders(event_mapping);
 
-    newData.length = 40000;
+    newData.length = 1000;
 
     const result = filterData(newData, tempBLE, tempWifi);
 

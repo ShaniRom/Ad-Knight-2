@@ -26,23 +26,28 @@ interface BarChartProps {
 const BarChart = (props: BarChartProps) => {
 
   const { dataSaved,chartdata,dataWifi,dataBLE} = props;
-
   let [CSVdata, setCSVdata] = useState(dataSaved);  
   let [backgroundcolor, setBackGroundColor] = useState<any>([]);
   let [chartClicked, setChartClicked] = useState(false);
   const [wifiBLE,setWifiBLE] = useState(false)
   let [chartData, setChartData] = useState<any>(chartdata);
-  let [filteredData, setfilteredData] =useState<any>([]);
   const chartRef: any = useRef(null);
   const [wifiData, setwifiData] = useState<any>(chartData.wifiData);
   const [bleData, setbleData] = useState<any>(chartData.bleData);
+  const [dataSetData,setData]=useState('')
+
   
   
   // set colors by values
   useEffect(() => {
-
-
-  }, []);
+    const wifiData = createChartData(dataWifi, dataSetData);
+    
+    const bleData = createChartData(dataBLE, dataSetData);
+    setwifiData( wifiData)
+    setbleData(bleData)
+    
+  }, [dataSetData]);
+  console.log( dataSetData)
 
   // get chart data for table
 
@@ -120,8 +125,7 @@ const BarChart = (props: BarChartProps) => {
       
       {/* <Table chartClicked={chartClicked} chartData={chartData} keysOfObj={keysOfObj} /> */}
 
-      <ChangeLabels setChartData={setChartData} dataWifi={dataWifi} dataBLE={dataBLE} 
-      />
+      <ChangeLabels dataSetData={dataSetData} setData={setData} />
 
       {/* <CSVLink data={dataSaved}>Export CSV</CSVLink>; */}
       <button onClick={(CSVdata) => handleDownload(CSVdata)}>

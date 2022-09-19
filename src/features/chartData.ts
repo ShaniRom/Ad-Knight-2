@@ -28,8 +28,8 @@ const createChartData =  (someData : any,rssi:string) => {
       };
     }),
   }
-  // console.log(data);
- console.log('--------------------------------------------------------');
+  
+       console.log(data)
  
   
   return data;
