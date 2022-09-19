@@ -1,28 +1,58 @@
 export function findTimeFrame(someData:any){
+  
     let timeList:any =[];
+    // console.log(someData);
+    
 
     someData.forEach((data: any) => {
         timeList.push(data.date);
+
       });
-      console.log(timeList);
-    
-      const timeListArray= timeList.filter(
-        (n: any, i: any) => timeList.indexOf(n) === i
-      );
-      console.log(timeListArray);
-   let allTimeObj:any=[];
-    timeListArray.map((time: any) => {
-        console.log(time)
-    const tempObj = {objArray:someData.filter((obj: any) => {obj['date']['seconds'] ===time.seconds})}
+      // console.log(timeList);
+      
+      let tempDate:any = [];
+      // let timeRange:any=[];
+
+      
+      let tempYear = timeList[0].year;
+      let tempMonth = timeList[0].month
+      let tempDay = timeList[0].day;
+      let tempHours=timeList[0].hours;
+      let tempMins=timeList[0].minutes;
+      let tempSecs=timeList[0].seconds;
+
+      const timeRange = timeList.filter((date:any , i:number , arr:any) => {
+        return arr.indexOf(arr.find((t:any) => (t.year === date.year) && (t.month === date.month) && 
+        (t.day === date.day) && (t.hours === date.hours) && (t.minutes === date.minutes) && (t.seconds === date.seconds))) === i
+        })
+
+      return timeRange
+
+    }
+
+      
+
+
+      
+  //     const timeListArray= timeList.filter(
+  //       (n: any, i: any) => timeList.indexOf(n) === i
+  //     );
+  //     console.log(timeListArray);
+  //   let allTimeObj:any=[];
+  //   timeListArray.map((time: any) => {
+  //     // {mac1Value:mac1,objArray:list.filter((obj: any) => obj.MAC_1 === mac1)}
+  //   const tempObj = {objArray:someData.filter((obj: any) => obj.date === time , console.log(time)
+  //   )}
 
         
-    console.log(tempObj)
-     allTimeObj.push(tempObj)
+    
+  //    allTimeObj.push(tempObj)
    
-    });
+  //   });
 
-  return allTimeObj
-}
+  //   console.log(allTimeObj);
+  // return allTimeObj;
+
 
 
 // export const handleByTime = (someData:any) => {
@@ -30,6 +60,9 @@ export function findTimeFrame(someData:any){
 //   let tempHours=someData[0].date.hours;
 //   let tempMins=someData[0].date.minutes;
 //   let tempSecs=someData[0].date.seconds;
+//   let tempDay = someData[0].date.day
+// let tempYear = someData[0].date.year  
+
 //   let count=0;
 //   let time=[];
 

@@ -8,87 +8,43 @@ import "../style/style.scss";
 import { setDatasets } from "react-chartjs-2/dist/utils";
 import {filterData} from '../features/filter'
 import Table from "./Table";
-import Form from "./Form";
-import {getColors} from '../features/colors'
+import List from "./List";
+import ChangeLabels from "./ChangeLabels";
+import ChartDiv from "./Chart";
 Chart.register(...registerables);
 
 
 interface BarChartProps {
   dataSaved: any;
-  keysBLE:Array<any>
-  keysOfObj: Array<any>;
-  keysWIFI: Array<any>;
   chartdata:any;
+  dataWifi:Array<any>;
+  dataBLE:Array<any>;
 }
 
 
 
 const BarChart = (props: BarChartProps) => {
 
-  let { dataSaved, keysOfObj,keysBLE ,keysWIFI,chartdata} = props;
+  const { dataSaved,chartdata,dataWifi,dataBLE} = props;
 
-
-  
-  // console.log(keysOfObj);
-  
-dataSaved.length = 500;
-
-
-// console.log(dataSaved);
-
-  let [CSVdata, setCSVdata] = useState(dataSaved);
-  let [dataSetData,setdataSetsData] = useState("rssi_0")
-  let [Label, setChosenLabel] = useState();
-  let [dataWifi, setDataWifi] = useState<any>([]);
-  let [dataBLE , setDataBLE] = useState<any>([]); 
+  let [CSVdata, setCSVdata] = useState(dataSaved);  
   let [backgroundcolor, setBackGroundColor] = useState<any>([]);
   let [chartClicked, setChartClicked] = useState(false);
-  let [years, setYears] = useState<any>({});
-  let [choseYears, setChoseYears] = useState(false);
   const [wifiBLE,setWifiBLE] = useState(false)
-  let [chartData, setChartData] = useState<any>();
+  let [chartData, setChartData] = useState<any>(chartdata);
   let [filteredData, setfilteredData] =useState<any>([]);
   const chartRef: any = useRef(null);
-
- 
+  const [wifiData, setwifiData] = useState<any>(chartData.wifiData);
+  const [bleData, setbleData] = useState<any>(chartData.bleData);
   
   
-  const [wifidata, setwifidata] = useState<any>(chartdata.wifiData);
-  const [bledata, setbledata] = useState<any>(chartdata.bleData);
-  
-  console.log(wifiBLE);
-  
-
   // set colors by values
   useEffect(() => {
-    (async () => {
-      getColors(dataSaved).then((result) => {
-        const colors = result.backGroundColor;
-        colors.map((color:any) => {
-         backgroundcolor.push(color) 
-        })
-         
-         setBackGroundColor(colors)
-       })
-       
-        
-      //  setUserData
-      //  console.log(result);
-      //  const rssi = result.BLEData.rssi_0 * -1;
-      //  const sec:any = "seconds"
-      //  const newData = await createChartData(result.BLEData,sec,rssi)
-      //  setUserData(newData);
-       
-    })();
-  
-    
+
+
   }, []);
 
-
-       
-
   // get chart data for table
-
 
   const getChart = async (ev: any) => {
     // console.log(ev);
@@ -99,32 +55,27 @@ dataSaved.length = 500;
     setChartClicked(true);
   };
 
-  
-
   async function getChartData(index: any) {
     
     let chartData;
-    if(choseYears){
-     chartData=filteredData[index]
-    }else{
-       chartData = CSVdata[index];
-    }
-    setChartData(chartData);
-    // console.log(chartData);
+    // if(choseYears){
+    //  chartData=filteredData[index]
+    // }else{
+    //    chartData = CSVdata[index];
+    // }
+    // setChartData(chartData);
   }
 
-
-
   function handleDownload(CSVdata: any) {
-    console.log(wifidata.datasets[0].data);
-    console.log(wifidata.labels);
+    // console.log(wifiData.datasets[0].data);
+    // console.log(wifiData.labels);
    
 
-    const dataTemp = wifidata.labels.map((year: any, i: number) => {
-      return { mam: wifidata.datasets[0].data[i], Year: year };
+    const dataTemp = wifiData.labels.map((year: any, i: number) => {
+      return { mam: wifiData.datasets[0].data[i], Year: year };
     });
 
-    console.log(dataTemp);
+    // console.log(dataTemp);
 
     const templist = dataTemp.map((obj: any, i: number) => {
       return {
@@ -152,7 +103,7 @@ dataSaved.length = 500;
     link.download = "chart.png";
     link.href = chartRef.current.toBase64Image("image/png", 1);
     link.click();
-    console.log(link);
+    
   }
 
   async function changeBLE(){
@@ -161,53 +112,25 @@ dataSaved.length = 500;
   }
  
   return (
-    <>
-      <div className="chart" id="chartImg">
-        <Line 
-          style={{ width: 500, height: 350 }}
-          ref={chartRef}
-          onClick={getChart}
-          data={wifiBLE?wifidata:bledata}
-          options={{
-            maintainAspectRatio: false,
-            responsive: true,
-            plugins: {
-              legend: {
-                position: 'top' as const,
-              },
-              title: {
-                display: true,
-                text: 'Chart.js Line Chartsssssss',
-              },
-            },
-          }}
-        />
-      
-      </div>
+    <div className="main">
+      {/* <List bleData={bleData} wifiData={wifiData} wifiBLE={wifiBLE} /> */}
+     <ChartDiv bleData={bleData} wifiData={wifiData} wifiBLE={wifiBLE}/>
 
       <button name="changeBLE" onClick={changeBLE}>{wifiBLE?"BLE":"WIFI"}</button>
-      {/* <Form
-        userData={userData}
-        setYears={setYears}
-        dataSaved={dataSaved}
-        setChoseYears={setChoseYears}
-        setfilteredData={setfilteredData}
-      /> */}
-      <Table
-        chartClicked={chartClicked}
-        chartData={chartData}
-        keysOfObj={keysOfObj}
+      
+      {/* <Table chartClicked={chartClicked} chartData={chartData} keysOfObj={keysOfObj} /> */}
+
+      <ChangeLabels setChartData={setChartData} dataWifi={dataWifi} dataBLE={dataBLE} 
       />
 
-      
-
-      {/* </div>  */}
       {/* <CSVLink data={dataSaved}>Export CSV</CSVLink>; */}
       <button onClick={(CSVdata) => handleDownload(CSVdata)}>
         Download To CSV
       </button>
       <button onClick={handleDownloadToImg}>Download To Image</button>
-    </>
+      
+      </div>
+    
   );
 };
 
