@@ -60,11 +60,13 @@ function App() {
 
     const wifiList = result.wifiData;
     const bleList = result.BLEData;
-
+ 
+    console.log(wifiList)
     const bleData = createChartData(bleList, "rssi_0" , "MAC_1");
     const wifiData = createChartData(wifiList, "rssi_0","MAC_1");
-    
-    
+   
+
+
     setFileAdded(true);
     setDataBLE(bleList);
     setDataWifi(wifiList);

@@ -8,7 +8,7 @@ import "../style/style.scss";
 import { setDatasets } from "react-chartjs-2/dist/utils";
 import {filterData} from '../features/filter'
 import Table from "./Table";
-import List from "./List";
+
 import ChangeChartData from "./ChangeChartData";
 import ChartDiv from "./Chart";
 Chart.register(...registerables);
@@ -33,10 +33,10 @@ const BarChart = (props: BarChartProps) => {
   const [wifiBLE,setWifiBLE] = useState(false)
   // let [chartData, setChartData] = useState<any>(chartdata);
   
-  const [wifiData, setwifiData] = useState<any>(chartdata.bleData);
+  const [wifiData, setwifiData] = useState<any>(chartdata.wifiData);
   const [bleData, setbleData] = useState<any>(chartdata.bleData);
-  const [dataSetData,setData]=useState('')
-  const [dataSet,setDataset]=useState('')
+  const [dataSetData,setData]=useState('rssi_0')
+  const [dataSet,setDataset]=useState('MAC_1')
   const chartRef: any = useRef(null);
   
   
@@ -48,7 +48,7 @@ const BarChart = (props: BarChartProps) => {
     setwifiData( wifiData)
     setbleData(bleData)
     
-  }, [dataSetData,dataSet]);
+  }, [dataSetData,dataSet,wifiBLE]);
   
 
   // get chart data for table
