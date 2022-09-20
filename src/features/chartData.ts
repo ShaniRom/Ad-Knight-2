@@ -4,24 +4,27 @@ import {findTimeFrame} from './timeRange';
 
 
 
-const createChartData =  (someData : any,rssi:string) => {
+const createChartData =  (someData : any,dataSetData:string,dataSet:string) => {
 
   
-  const dataSetList =  filterByMac1(someData);
+  
+  const dataSetList =  filterByMac1(someData,dataSet);
   const labelsList=  findTimeFrame(someData);
   const backGroundColor = getColors(dataSetList);
-
-
-  const label = rssi;
-  console.log(label);
  
+  console.log(dataSetData);
+  
+  console.log(dataSetList);
+  
+  
   const data = {
-    labels: labelsList.map((date:any) =>  ` ${date.day}/${date.month}/${date.year}` + " " +
-    `${date.hours}:${date.minutes}:${date.seconds}`),
+    labels: labelsList.map((date:any) =>  ` ${date.hours}` + " " +
+    `:0${date.minutes}:0${date.seconds}`),
     datasets: dataSetList.map((mac1: any,i:number) => {
+    
       return {
-        label: mac1.mac1Value + " " + label,
-        data:  mac1.objArray.map((data: any) => data[`${label}`]),
+        label: mac1.chosendataSet + " " + dataSetData,
+        data:  mac1.objArray.map((data: any) => data[`${dataSetData}`]),
         borderColor: backGroundColor.map((color: any) =>  color),
         backgroundColor: backGroundColor[i],
         tension:0.5
@@ -29,9 +32,7 @@ const createChartData =  (someData : any,rssi:string) => {
     }),
   }
   
-       console.log(data)
- 
-  
+      
   return data;
 
 };

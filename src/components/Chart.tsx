@@ -5,23 +5,26 @@ import { Line , getElementAtEvent, Doughnut } from "react-chartjs-2";
 interface ChartProps{
     wifiBLE:boolean;
     wifiData:any;
-    bleData:any
+    bleData:any;
 }
 
 function ChartDiv(props:ChartProps) {
 
   const {wifiBLE,bleData,wifiData} = props;
 
+  const [min,setMin] = useState(0);
+  const [max,setMax] = useState(0);
+
+
   const chartRef:any = useRef(null);
 
- 
-  
+  console.log(wifiData);
   
 
   return (
 
     <div className="chart" id="chartImg">
-        <Line style={{ width: '100%', height: 500 , opacity:0.8}} 
+        <Line style={{ width: '95%', height: 500 , opacity:0.8,backgroundColor:"black"}} 
         ref={chartRef}  
         data={wifiBLE?wifiData:bleData}
           options={{
@@ -44,7 +47,7 @@ function ChartDiv(props:ChartProps) {
                 display: true,
                 position: 'left',
                 min: -100,
-                max: -60,
+                max: 20,
                 
                 grid: {
                   borderColor: 'blue', 

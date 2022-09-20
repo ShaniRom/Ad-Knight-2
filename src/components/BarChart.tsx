@@ -9,7 +9,7 @@ import { setDatasets } from "react-chartjs-2/dist/utils";
 import {filterData} from '../features/filter'
 import Table from "./Table";
 import List from "./List";
-import ChangeLabels from "./ChangeLabels";
+import ChangeChartData from "./ChangeChartData";
 import ChartDiv from "./Chart";
 Chart.register(...registerables);
 
@@ -26,28 +26,30 @@ interface BarChartProps {
 const BarChart = (props: BarChartProps) => {
 
   const { dataSaved,chartdata,dataWifi,dataBLE} = props;
+
+
   let [CSVdata, setCSVdata] = useState(dataSaved);  
-  let [backgroundcolor, setBackGroundColor] = useState<any>([]);
   let [chartClicked, setChartClicked] = useState(false);
   const [wifiBLE,setWifiBLE] = useState(false)
-  let [chartData, setChartData] = useState<any>(chartdata);
-  const chartRef: any = useRef(null);
-  const [wifiData, setwifiData] = useState<any>(chartData.wifiData);
-  const [bleData, setbleData] = useState<any>(chartData.bleData);
+  // let [chartData, setChartData] = useState<any>(chartdata);
+  
+  const [wifiData, setwifiData] = useState<any>(chartdata.bleData);
+  const [bleData, setbleData] = useState<any>(chartdata.bleData);
   const [dataSetData,setData]=useState('')
-
+  const [dataSet,setDataset]=useState('')
+  const chartRef: any = useRef(null);
   
   
   // set colors by values
   useEffect(() => {
-    const wifiData = createChartData(dataWifi, dataSetData);
-    
-    const bleData = createChartData(dataBLE, dataSetData);
+
+    const wifiData = createChartData(dataWifi, dataSetData,dataSet);
+    const bleData = createChartData(dataBLE, dataSetData,dataSet);
     setwifiData( wifiData)
     setbleData(bleData)
     
-  }, [dataSetData]);
-  console.log( dataSetData)
+  }, [dataSetData,dataSet]);
+  
 
   // get chart data for table
 
@@ -125,7 +127,7 @@ const BarChart = (props: BarChartProps) => {
       
       {/* <Table chartClicked={chartClicked} chartData={chartData} keysOfObj={keysOfObj} /> */}
 
-      <ChangeLabels dataSetData={dataSetData} setData={setData} />
+      <ChangeChartData wifiBLE={wifiBLE} setData={setData} setDataset={setDataset}/>
 
       {/* <CSVLink data={dataSaved}>Export CSV</CSVLink>; */}
       <button onClick={(CSVdata) => handleDownload(CSVdata)}>

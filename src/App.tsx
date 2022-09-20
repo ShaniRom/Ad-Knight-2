@@ -9,7 +9,6 @@ import { filterData } from "./features/filter";
 import createChartData from "./features/chartData";
 import { ListFormat } from "typescript";
 // import { FileHandle } from "fs/promises";
-import ChangeLabels from "./components/ChangeLabels";
 const allowedExtensions = ["csv"];
 
 function App() {
@@ -62,9 +61,10 @@ function App() {
     const wifiList = result.wifiData;
     const bleList = result.BLEData;
 
-    const bleData = createChartData(bleList, "rssi_0");
-    const wifiData = createChartData(wifiList, "rssi_0");
-
+    const bleData = createChartData(bleList, "rssi_0" , "MAC_1");
+    const wifiData = createChartData(wifiList, "rssi_0","MAC_1");
+    
+    
     setFileAdded(true);
     setDataBLE(bleList);
     setDataWifi(wifiList);
