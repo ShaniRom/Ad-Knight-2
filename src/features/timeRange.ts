@@ -1,25 +1,16 @@
 export function findTimeFrame(someData:any){
   
     let timeList:any =[];
-    // console.log(someData);
+    
     
 
     someData.forEach((data: any) => {
         timeList.push(data.date);
 
       });
-      // console.log(timeList);
+     
       
-      let tempDate:any = [];
-      // let timeRange:any=[];
-
       
-      let tempYear = timeList[0].year;
-      let tempMonth = timeList[0].month
-      let tempDay = timeList[0].day;
-      let tempHours=timeList[0].hours;
-      let tempMins=timeList[0].minutes;
-      let tempSecs=timeList[0].seconds;
 
       const timeRange = timeList.filter((date:any , i:number , arr:any) => {
         return arr.indexOf(arr.find((t:any) => (t.year === date.year) && (t.month === date.month) && 

@@ -1,24 +1,19 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
+
 import event_mapping from "./features/event_mapping.json";
-import { Doughnut } from "react-chartjs-2";
+
 import BarChart from "./components/BarChart";
-import { Chart, registerables } from "chart.js";
+
 import Papa from "papaparse";
 import { filterData } from "./features/filter";
 import createChartData from "./features/chartData";
-import { ListFormat } from "typescript";
+
 // import { FileHandle } from "fs/promises";
 const allowedExtensions = ["csv"];
 
 function App() {
   const [fileAdded, setFileAdded] = useState(false);
-  const [csvData, setCsvData] = useState<any>();
-
-  const [keysOfObj, setKeysOfObj] = useState<any>([]);
-  const [dataSaved, setDataSaved] = useState<any>([]);
-  const [keysWIFI, setKeysWIFI] = useState<any>([]);
-  const [keysBLE, setKeysBLE] = useState<any>([]);
+  const [csvData, setCsvData] = useState<any>(); 
   let [chartdata, setChartData] = useState<any>();
   let [dataWifi, setDataWifi] = useState<any>([]);
   let [dataBLE, setDataBLE] = useState<any>([]);
@@ -40,8 +35,7 @@ function App() {
       tempBLE.push(obj[0]);
     });
 
-    setKeysWIFI(tempWifi);
-    setKeysBLE(tempBLE);
+
     return { tempWifi, tempBLE };
   }
 
@@ -60,30 +54,23 @@ function App() {
 
     const wifiList = result.wifiData;
     const bleList = result.BLEData;
- 
-    console.log(wifiList)
-    const bleData = createChartData(bleList, "rssi_0" , "MAC_1");
-    const wifiData = createChartData(wifiList, "rssi_0","MAC_1");
-   
 
+    console.log(wifiList);
+    const bleData = createChartData(bleList, "rssi_0", "MAC_1");
+    const wifiData = createChartData(wifiList, "rssi_0", "MAC_1");
 
     setFileAdded(true);
     setDataBLE(bleList);
     setDataWifi(wifiList);
     setChartData({ wifiData, bleData });
 
-    // await setChartData(data);
+   
   }
 
   return (
     <div className="App">
       {fileAdded ? (
-        <BarChart
-          dataSaved={dataSaved}
-          chartdata={chartdata}
-          dataWifi={dataWifi}
-          dataBLE={dataBLE}
-        />
+        <BarChart chartdata={chartdata} dataWifi={dataWifi} dataBLE={dataBLE} />
       ) : null}
 
       {fileAdded ? null : (
@@ -96,7 +83,7 @@ function App() {
 
 export default App;
 
-function papaparse(newFile:any): Promise<Array<any>> {
+function papaparse(newFile: any): Promise<Array<any>> {
   return new Promise((resolve, reject) => {
     Papa.parse(newFile, {
       header: false,
