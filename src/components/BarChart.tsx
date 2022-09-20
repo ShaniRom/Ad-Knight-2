@@ -26,8 +26,8 @@ const BarChart = (props: BarChartProps) => {
 
   const [wifiData, setwifiData] = useState<any>(chartdata.wifiData);
   const [bleData, setbleData] = useState<any>(chartdata.bleData);
-  const [dataSetData, setData] = useState("");
-  const [dataSet, setDataset] = useState("");
+  const [dataSetData, setData] = useState("rssi_0");
+  const [dataSet, setDataset] = useState("MAC_1");
   const chartRef: any = useRef(null);
 console.log(wifiData)
   // set colors by values

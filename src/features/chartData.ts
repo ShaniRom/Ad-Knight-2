@@ -1,4 +1,4 @@
-import { filterByMac1 } from "./filter";
+import { filterDataSet } from "./filter";
 import { getColors } from "./colors";
 import {findTimeFrame} from './timeRange';
 
@@ -8,7 +8,7 @@ const createChartData =  (someData : any,dataSetData:string,dataSet:string) => {
 
   
   const type =someData[0].wifi_ble
-  const dataSetList =  filterByMac1(someData,dataSet);
+  const dataSetList =  filterDataSet(someData,dataSet);
   const labelsList=  findTimeFrame(someData);
   const backGroundColor = getColors(dataSetList);
 console.log(dataSetList)

@@ -13,7 +13,7 @@ const allowedExtensions = ["csv"];
 
 function App() {
   const [fileAdded, setFileAdded] = useState(false);
-  const [csvData, setCsvData] = useState<any>(); 
+  const [csvData, setCsvData] = useState<any>();
   let [chartdata, setChartData] = useState<any>();
   let [dataWifi, setDataWifi] = useState<any>([]);
   let [dataBLE, setDataBLE] = useState<any>([]);
@@ -35,7 +35,6 @@ function App() {
       tempBLE.push(obj[0]);
     });
 
-
     return { tempWifi, tempBLE };
   }
 
@@ -48,7 +47,7 @@ function App() {
 
     const { tempWifi, tempBLE } = handleFilterHeaders(event_mapping);
 
-    newData.length = 1000;
+    newData.length = 50000;
 
     const result = filterData(newData, tempBLE, tempWifi);
 
@@ -63,8 +62,6 @@ function App() {
     setDataBLE(bleList);
     setDataWifi(wifiList);
     setChartData({ wifiData, bleData });
-
-   
   }
 
   return (
