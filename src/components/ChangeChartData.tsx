@@ -12,7 +12,7 @@ function ChangeChartData(props: ChangeChartDataProps) {
 
    function changeDatasets(ev: any) {
     ev.preventDefault();
-
+    
     const newDataSetData = ev.target.elements.changeChartData.value;
     const newDataSet = ev.target.elements.changeChartDatasetBle.value;
      setData(newDataSetData)
@@ -31,7 +31,7 @@ function ChangeChartData(props: ChangeChartDataProps) {
 
         <label htmlFor="changeChartDatasetBle">select Data set:</label>
         <select className="selectChartDataset" name="changeChartDatasetBle" required>
-          
+
           <option value="MAC_1">MAC 1</option>
           {wifiBLE?<option value="MAC_2">MAC_2</option>:null}
           <option value="event_id">event id</option>
