@@ -6,14 +6,14 @@ ChartJS.register(zoomPlugin)
 
 
 interface ChartProps{
-    wifiBLE:boolean;
+    isBleOrWifi:boolean;
     wifiData:any;
     bleData:any;
 }
 
 function ChartDiv(props:ChartProps) {
 
-  const {wifiBLE,bleData,wifiData} = props;
+  const {isBleOrWifi,bleData,wifiData} = props;
 
   const [min,setMin] = useState(-100);
   const [max,setMax] = useState(-65);
@@ -21,6 +21,7 @@ function ChartDiv(props:ChartProps) {
 
   const chartRef:any = useRef(null);
 
+  console.log(wifiData);
   
   
 
@@ -29,7 +30,7 @@ function ChartDiv(props:ChartProps) {
     <div className="chart" id="chartImg">
         <Line style={{ width: '100%', height: 100 , opacity:0.8,backgroundColor:"black"}} 
         ref={chartRef}  
-        data={wifiBLE?wifiData:bleData}
+        data={isBleOrWifi?wifiData:bleData}
           options={{
             responsive: true,
             interaction: {

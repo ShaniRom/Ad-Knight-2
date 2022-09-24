@@ -4,14 +4,13 @@ import {filterDataToSelect} from '../features/filter'
 
 
 interface ChangeChartDataProps {
-  setData:Function;
-  setDataset:Function;
-  wifiBLE:boolean;
-  dataBLE:Array<any>
-  dataWifi:Array<any>
+  setRssiData:Function;
+  setMacData:Function;
+  isBleOrWifi:boolean;
 }
 
 function ChangeChartData(props: ChangeChartDataProps) {
+  const { setRssiData ,setMacData,isBleOrWifi} = props;
 
 
   const { setData ,setDataset,wifiBLE,dataBLE,dataWifi} = props;
@@ -45,7 +44,7 @@ function ChangeChartData(props: ChangeChartDataProps) {
         <select className="form_selectChangeChartData" name="changeChartDataset" required>
 
           <option value="MAC_1">MAC 1</option>
-          {wifiBLE?<option value="MAC_2">MAC_2</option>:null}
+          {isBleOrWifi?<option value="MAC_2">MAC_2</option>:null}
           <option value="event_id">event id</option>
         </select>
         </label>
