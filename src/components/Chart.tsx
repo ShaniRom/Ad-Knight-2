@@ -42,7 +42,7 @@ function ChartDiv(props:ChartProps) {
               },
               title: {
                 display: true,
-                text: wifiBLE?"WIFI":"BLE",
+                text: isBleOrWifi?"WIFI":"BLE",
               },
             },
             scales: {

@@ -4,26 +4,29 @@ import {filterDataToSelect} from '../features/filter'
 
 
 interface ChangeChartDataProps {
-  setRssiData:Function;
-  setMacData:Function;
+  setYdata:Function;
+  setDataSet:Function;
   isBleOrWifi:boolean;
+  dataBLEAndKey:Array<any>;
+  dataWifiAndKey:Array<any>;
+
 }
 
 function ChangeChartData(props: ChangeChartDataProps) {
-  const { setRssiData ,setMacData,isBleOrWifi} = props;
+  const { setDataSet ,setYdata,isBleOrWifi,dataBLEAndKey,dataWifiAndKey} = props;
 
 
-  const { setData ,setDataset,wifiBLE,dataBLE,dataWifi} = props;
 
-  const lala = filterDataToSelect(dataBLE)
+
+  const lala = filterDataToSelect(dataBLEAndKey)
   // const lalas = filterDataToSelect(dataWifi)
    function changeDatasets(ev: any) {
     ev.preventDefault();
     
     const newDataSetData = ev.target.elements.changeChartData.value;
     const newDataSet = ev.target.elements.changeChartDataset.value;
-     setData(newDataSetData)
-     setDataset(newDataSet)
+    setYdata(newDataSetData)
+     setDataSet(newDataSet)
   }
 
   return (

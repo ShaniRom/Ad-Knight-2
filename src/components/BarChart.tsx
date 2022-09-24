@@ -27,17 +27,17 @@ const BarChart = (props: BarChartProps) => {
 
   const [wifiData, setWifiData] = useState<any>(theChartData.wifiData);
   const [bleData, setBleData] = useState<any>(theChartData.bleData);
-  const [rssiData, setRssiData] = useState("rssi_0");
-  const [macData, setMacData] = useState("MAC_1");
+  const [Ydata, setYdata] = useState("rssi_0");
+  const [dataSet, setDataSet] = useState("MAC_1");
   const chartRef: any = useRef(null);
   
 
   useEffect(() => {
-    const wifiData = createChartData(dataWifiAndKey, rssiData, macData);
-    const bleData = createChartData(dataBLEAndKey, rssiData, macData);
+    const wifiData = createChartData(dataWifiAndKey, Ydata, dataSet);
+    const bleData = createChartData(dataBLEAndKey, Ydata, dataSet);
     setWifiData(wifiData);
     setBleData(bleData);
-  }, [rssiData, macData, isBleOrWifi]);
+  }, [Ydata, dataSet, isBleOrWifi]);
 
   // get chart data for table
 
@@ -116,8 +116,10 @@ console.log(theChartData);
 
       <ChangeChartData
         isBleOrWifi={isBleOrWifi}
-        setRssiData={setRssiData}
-        setMacData={setMacData}
+        setYdata={setYdata}
+        setDataSet={setDataSet}
+          dataBLEAndKey={dataBLEAndKey}
+          dataWifiAndKey={dataWifiAndKey}
       />
 
       <button onClick={(CSVdata) => handleDownload(CSVdata)}>
@@ -125,7 +127,7 @@ console.log(theChartData);
       </button>
       <button onClick={handleDownloadToImg}>Download To Image</button>
       </div>
-    </div>
+    
   );
 };
 
