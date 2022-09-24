@@ -57,6 +57,8 @@ function App() {
 
     const bleData = defaultChartData(bleList);
     const wifiData = defaultChartData(wifiList);
+    // const bleData = createChartData(bleList, "rssi_0", "MAC_1",[1,2,3,4]);
+    // const wifiData = createChartData(wifiList, "rssi_0", "MAC_1",[1,2,3,4]);
 
     setFileAdded(true);
     setdataBLEAndKey(bleList);

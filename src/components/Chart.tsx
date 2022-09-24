@@ -9,19 +9,20 @@ interface ChartProps{
     isBleOrWifi:boolean;
     wifiData:any;
     bleData:any;
+    chartRef:any
 }
 
 function ChartDiv(props:ChartProps) {
 
-  const {isBleOrWifi,bleData,wifiData} = props;
+  const {isBleOrWifi,bleData,wifiData,chartRef} = props;
 
   const [min,setMin] = useState(-100);
   const [max,setMax] = useState(-65);
 
 
-  const chartRef:any = useRef(null);
+  
 
-  console.log(wifiData);
+  // console.log(wifiData);
   
   
 
