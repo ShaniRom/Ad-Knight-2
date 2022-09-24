@@ -28,17 +28,18 @@ const BarChart = (props: BarChartProps) => {
   const [bleData, setBleData] = useState<any>(theChartData.bleData);
   const [rssiData, setRssiData] = useState("rssi_0");
   const [macData, setMacData] = useState("MAC_1");
+  const [labels,setLabels]=useState([])
   const chartRef: any = useRef(null);
-  console.log(typeof(chartRef))
+  
 console.log(wifiData)
 
   // set colors by values
   useEffect(() => {
-    const wifiData = createChartData(dataWifiAndKey, rssiData, macData);
-    const bleData = createChartData(dataBLEAndKey, rssiData, macData);
+    const wifiData = createChartData(dataWifiAndKey, rssiData, macData,labels);
+    const bleData = createChartData(dataBLEAndKey, rssiData, macData,labels);
     setWifiData(wifiData);
     setBleData(bleData);
-  }, [rssiData, macData, isBleOrWifi]);
+  }, [rssiData, macData, isBleOrWifi,labels]);
 
   // get chart data for table
 
@@ -122,6 +123,8 @@ console.log(theChartData);
         isBleOrWifi={isBleOrWifi}
         setRssiData={setRssiData}
         setMacData={setMacData}
+        data={isBleOrWifi?dataWifiAndKey:dataBLEAndKey}
+        setLabels={setLabels}
       />
 
       <button onClick={(CSVdata) => handleDownload(CSVdata)}>

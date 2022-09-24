@@ -4,19 +4,20 @@ import {findTimeFrame} from './timeRange';
 
 
 //dataset is the line
-const createChartData =  (someData : any,dataSetData:string,dataSet:string) => {
+const createChartData =  (someData : any,dataSetData:string,dataSet:string,labels:Array<any>) => {
 
   
   const type =someData[0].wifi_ble
   const dataSetList =  filterDataSet(someData,dataSet);
-  const labelsList=  findTimeFrame(someData);
+
+
   const backGroundColor = getColors(dataSetList);
 console.log(dataSetList)
   // console.log(dataSetData)
   // console.log(dataSet)
-  
+ console.log(labels)
   const data = {
-    labels: labelsList.map((date:any) =>  ` ${date.hours}` + " " +
+    labels: labels.map((date:any) =>  ` ${date.hours}` + " " +
     `:0${date.minutes}:0${date.seconds}`),
     datasets: dataSetList.map((line: any,i:number) => {
       

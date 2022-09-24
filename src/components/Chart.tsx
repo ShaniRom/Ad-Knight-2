@@ -19,7 +19,7 @@ function ChartDiv(props:ChartProps) {
 
   
 
-  console.log(wifiData);
+  // console.log(wifiData);
   
   
 

@@ -47,16 +47,16 @@ function App() {
 
     const { tempWifi, tempBLE } = handleFilterHeaders(event_mapping);
 
-    newData.length = 1000;
+    newData.length = 2000;
 
     const result = filterData(newData, tempBLE, tempWifi);
 
     const wifiList = result.wifiData;
     const bleList = result.BLEData;
 
-    console.log(wifiList);
-    const bleData = createChartData(bleList, "rssi_0", "MAC_1");
-    const wifiData = createChartData(wifiList, "rssi_0", "MAC_1");
+   
+    const bleData = createChartData(bleList, "rssi_0", "MAC_1",[1,2,3,4]);
+    const wifiData = createChartData(wifiList, "rssi_0", "MAC_1",[1,2,3,4]);
 
     setFileAdded(true);
     setdataBLEAndKey(bleList);

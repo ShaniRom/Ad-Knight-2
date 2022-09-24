@@ -111,7 +111,7 @@ export const filterDataSet= (list:Array<any> , dataset:string) => {
   const datasetListArray = datasetList.filter(
     (n: any, i: any) => datasetList.indexOf(n) === i
   )
-  console.log(datasetListArray)
+  // console.log(datasetListArray)
    let allMacObj:any=[];
     datasetListArray.map((line: any) => {
     const tempObj = {chosendataSet:line,objArray:list.filter((obj: any) => obj[`${dataset}`] === line)};
