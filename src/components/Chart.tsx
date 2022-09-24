@@ -1,5 +1,8 @@
 import {useRef,useEffect,useState} from 'react'
 import { Line , getElementAtEvent, Doughnut } from "react-chartjs-2";
+import { Chart as ChartJS} from 'chart.js';
+import zoomPlugin from 'chartjs-plugin-zoom';
+ChartJS.register(zoomPlugin)
 
 
 interface ChartProps{
@@ -12,8 +15,8 @@ function ChartDiv(props:ChartProps) {
 
   const {wifiBLE,bleData,wifiData} = props;
 
-  const [min,setMin] = useState(0);
-  const [max,setMax] = useState(0);
+  const [min,setMin] = useState(-100);
+  const [max,setMax] = useState(-65);
 
 
   const chartRef:any = useRef(null);
@@ -24,7 +27,7 @@ function ChartDiv(props:ChartProps) {
   return (
 
     <div className="chart" id="chartImg">
-        <Line style={{ width: '95%', height: 500 , opacity:0.8,backgroundColor:"black"}} 
+        <Line style={{ width: '100%', height: 100 , opacity:0.8,backgroundColor:"black"}} 
         ref={chartRef}  
         data={wifiBLE?wifiData:bleData}
           options={{
@@ -38,7 +41,7 @@ function ChartDiv(props:ChartProps) {
               },
               title: {
                 display: true,
-                text: 'Chart.js Line Chart',
+                text: wifiBLE?"WIFI":"BLE",
               },
             },
             scales: {
@@ -46,8 +49,8 @@ function ChartDiv(props:ChartProps) {
                 type: 'linear',
                 display: true,
                 position: 'left',
-                min: -100,
-                max: 20,
+                min: min,
+                max: max,
                 
                 grid: {
                   borderColor: 'blue', 
@@ -55,6 +58,7 @@ function ChartDiv(props:ChartProps) {
               },
                 // grid line settings
               },
+              
             }}
         />
         

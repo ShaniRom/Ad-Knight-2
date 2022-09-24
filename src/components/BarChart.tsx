@@ -18,20 +18,23 @@ interface BarChartProps {
 }
 
 const BarChart = (props: BarChartProps) => {
+
+
   const { chartdata, dataWifi, dataBLE } = props;
 
+  
   let [chartClicked, setChartClicked] = useState(false);
   const [wifiBLE, setWifiBLE] = useState(false);
   // let [chartData, setChartData] = useState<any>(chartdata);
-
   const [wifiData, setwifiData] = useState<any>(chartdata.wifiData);
   const [bleData, setbleData] = useState<any>(chartdata.bleData);
-  const [dataSetData, setData] = useState("rssi_0");
-  const [dataSet, setDataset] = useState("MAC_1");
+  const [dataSetData, setData] = useState("");
+  const [dataSet, setDataset] = useState("");
   const chartRef: any = useRef(null);
-console.log(wifiData)
-  // set colors by values
+  
+
   useEffect(() => {
+
     const wifiData = createChartData(dataWifi, dataSetData, dataSet);
     const bleData = createChartData(dataBLE, dataSetData, dataSet);
     setwifiData(wifiData);
@@ -41,10 +44,10 @@ console.log(wifiData)
   // get chart data for table
 
   const getChart = async (ev: any) => {
-    // console.log(ev);
+   
     const chosenChart = getElementAtEvent(chartRef.current, ev);
     const index = chosenChart[0].index;
-    console.log(chosenChart);
+    
     await getChartData(index);
     setChartClicked(true);
   };
@@ -60,14 +63,11 @@ console.log(wifiData)
   }
 
   function handleDownload(CSVdata: any) {
-    // console.log(wifiData.datasets[0].data);
-    // console.log(wifiData.labels);
+   
 
     const dataTemp = wifiData.labels.map((year: any, i: number) => {
       return { mam: wifiData.datasets[0].data[i], Year: year };
     });
-
-    // console.log(dataTemp);
 
     const templist = dataTemp.map((obj: any, i: number) => {
       return {
@@ -103,25 +103,24 @@ console.log(wifiData)
 
   return (
     <div className="main">
-      {/* <List bleData={bleData} wifiData={wifiData} wifiBLE={wifiBLE} /> */}
       <ChartDiv bleData={bleData} wifiData={wifiData} wifiBLE={wifiBLE} />
 
-      <button name="changeBLE" onClick={changeBLE}>
+      
+
+      {/* <Table chartClicked={chartClicked} chartData={chartData} keysOfObj={keysOfObj} /> */}
+      <div className="main_filterChart">
+      <button className="main_changeBLEbtn" name="changeBLE" onClick={changeBLE}>
         {wifiBLE ? "BLE" : "WIFI"}
       </button>
 
-      {/* <Table chartClicked={chartClicked} chartData={chartData} keysOfObj={keysOfObj} /> */}
-
-      <ChangeChartData
-        wifiBLE={wifiBLE}
-        setData={setData}
-        setDataset={setDataset}
+      <ChangeChartData dataBLE={dataBLE} dataWifi={dataWifi} wifiBLE={wifiBLE} setData={setData} setDataset={setDataset}
       />
 
       <button onClick={(CSVdata) => handleDownload(CSVdata)}>
         Download To CSV
       </button>
       <button onClick={handleDownloadToImg}>Download To Image</button>
+      </div>
     </div>
   );
 };

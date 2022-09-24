@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@types/papaparse": "^5.3.5",
+    "chart.js": "^3.9.1",
+    "chartjs-plugin-zoom": "^1.2.1",
     "node-random-color": "^0.2.0",
     "papaparse": "^5.3.2",
     "react": "^18.2.0",

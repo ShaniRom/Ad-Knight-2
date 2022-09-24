@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 import event_mapping from "./features/event_mapping.json";
-
+import {defaultChartData} from './features/chartData'
 import BarChart from "./components/BarChart";
-
+import ObjectModel from "./models/ObjectModelBLE";
 import Papa from "papaparse";
 import { filterData } from "./features/filter";
 import createChartData from "./features/chartData";
@@ -39,24 +39,24 @@ function App() {
   }
 
   async function getCsvFile(ev: any) {
-    const newFile = ev.target.files[0];
 
+    let newFile = ev.target.files[0];
+    
     const data = await papaparse(newFile);
 
-    const newData: Array<any> = data;
+    const newData: Array<ObjectModel> = data;
 
     const { tempWifi, tempBLE } = handleFilterHeaders(event_mapping);
 
-    newData.length = 50000;
+    newData.length = 1000;
 
     const result = filterData(newData, tempBLE, tempWifi);
 
     const wifiList = result.wifiData;
     const bleList = result.BLEData;
 
-    console.log(wifiList);
-    const bleData = createChartData(bleList, "rssi_0", "MAC_1");
-    const wifiData = createChartData(wifiList, "rssi_0", "MAC_1");
+    const bleData = defaultChartData(bleList);
+    const wifiData = defaultChartData(wifiList);
 
     setFileAdded(true);
     setDataBLE(bleList);
@@ -69,7 +69,6 @@ function App() {
       {fileAdded ? (
         <BarChart chartdata={chartdata} dataWifi={dataWifi} dataBLE={dataBLE} />
       ) : null}
-
       {fileAdded ? null : (
         <input type="file" name="csvFile" accept=".csv" onChange={getCsvFile} />
       )}

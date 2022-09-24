@@ -1,8 +1,6 @@
 import getDate from "./getDate";
 
-
 export function filterData(dataSaved: any, keysBLE: any, keysWIFI: any) {
-
   const filteredBLE = dataSaved.filter((objBLE: any) => {
     return objBLE[0] === "BLE";
   });
@@ -33,7 +31,7 @@ function filterWithKeys(
   //   tempObj[`${key[i]}`] = ble[i];
 
   //  })
-   
+
   //   tempObj.ts = parseFloat(tempObj.ts);
   //   const dateFound = getDate(tempObj.ts);
   //   tempObj.date = dateFound;
@@ -42,9 +40,8 @@ function filterWithKeys(
   for (let i = 0; i < filteredBLE.length; i++) {
     let tempObj: any = {};
     for (let x = 0; x < filteredBLE[i].length; x++) {
-     
       const tempKey = keysBLE[x];
-     
+
       const tempValue = filteredBLE[i][x];
       tempObj[`${tempKey}`] = tempValue;
     }
@@ -99,27 +96,68 @@ function filterWithKeys(
 //   return result;
 // };
 
-export const filterDataSet= (list:Array<any> , dataset:string) => {
-
-  let datasetList: any = []; 
+export const filterDataSet = (list: Array<any>, dataset: string) => {
   
+  
+  let datasetList: any = [];
 
   list.forEach((data: any) => {
     datasetList.push(data[`${dataset}`]);
   });
-  
+
   const datasetListArray = datasetList.filter(
     (n: any, i: any) => datasetList.indexOf(n) === i
-  )
-  console.log(datasetListArray)
-   let allMacObj:any=[];
-    datasetListArray.map((line: any) => {
-    const tempObj = {chosendataSet:line,objArray:list.filter((obj: any) => obj[`${dataset}`] === line)};
-    allMacObj = [...allMacObj,tempObj]
+  );
+
+  let allMacObj: any = [];
+  datasetListArray.map((line: any) => {
+    const tempObj = {
+      chosendataSet: line,
+      objArray: list.filter((obj: any) => obj[`${dataset}`] === line),
+    };
+    allMacObj = [...allMacObj, tempObj];
+  });
+
+  return allMacObj;
+};
+
+export const filterDataToSelect = (list: Array<any>) => {
+
+  console.log(list);
+  
+  const numbersCheck = new RegExp(/^[(-9)-9.,]+$/);
+  const lettersCheck = new RegExp(/^[a-zA-Z\s.,]+$/);
+  const specialChars = new RegExp(/^[a-zA-Z\s.,]+$/);
+  
+  let listKeys: Array<string> = [];
+  let numbers: Array<String> = [];
+  let letters: Array<string> = [];
+  let filteredList: Array<string> = [];
+  let numbersAndLetters: Array<string> = [];
+  // check negative /^-\d+$/
+
+  Object.keys(list[0]).map((elm: any) => {
+    listKeys = [...listKeys, elm];
   });
   
-  console.log(allMacObj);
-  
-  return allMacObj
-}
+  listKeys.forEach((key: string) => {
 
+      const tempValue = list[0][`${key}`];
+
+      if (numbersCheck.test(tempValue)) {
+        numbers = [...numbers, key];
+      } else if (lettersCheck.test(tempValue) || specialChars.test(tempValue)) {
+        letters = [...letters, key];
+      } else {
+        numbersAndLetters = [...numbersAndLetters, key];
+      }
+
+    
+})
+
+  console.log('numbers',numbers);
+  console.log('letters',letters);
+  console.log('both',numbersAndLetters);
+    
+
+}

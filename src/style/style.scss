@@ -1,27 +1,50 @@
+body{
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+}
 #root{
     margin:0 auto;
-  text-align:center;
+  text-align: center;
   padding:2px;
 }
-.chart{
-     margin:-2vh 0 0 -4vw;
-    width: 99vw;
-    //box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
-     border: 2px solid black;
+#chartImg{
+    position: absolute;
+    top: 0;
+    right:0;
+    width: 85%;
+   
 }
-.btns{
-    margin-top: 10vh;
-    height: 5vh;
-    width: 99%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    border: 2px solid black;
+.main{
+    max-width:100%;
+    max-height: 100%;
 
-    &-btn{
-        width: 20%;
+    &_filterChart{
+        display: flex;
+        flex-direction: column;
+        row-gap: 15px;
+        width: 15%;
+        height: 100%;
+        max-height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        box-shadow: rgba(138, 138, 161, 0.55) 50px 30px 60px 80px inset, 
+        rgba(67, 187, 107, 0.4) 60px 18px 36px 80px inset,
+        rgba(18, 18, 134, 0.55) 60px 18px 36px 500px inset,
+        rgba(81, 220, 26, 0.55) 60px 18px 36px 500px inset;
+        
+    }
+    &_changeBLEbtn{
+        margin-top: 2vh;
+        box-shadow: rgba(204, 143, 12, 0.55) 50px 30px 60px 80px inset, 
+        rgba(41, 111, 68, 0.15) 60px 18px 36px 80px inset,
+        rgba(39, 198, 65, 0.15) 60px 18px 36px 500px inset;
+        width: 65%;
+        height: 5vh;
     }
 }
+
 .tableElms{
 
     margin: 5vh auto;
@@ -30,31 +53,21 @@
     border-collapse: collapse;
     width: 60%;
 }
-.formYears {
-    margin: 5vh auto;
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    row-gap: 20px;
 
     & label{
         text-align: start;
-    }
-}
-.selectChangeChartData{
-    margin-top:5vh ;
-    width: 10vw;
-    
-}
-.main{
-    width: 100%;
-    height: 100%;
+        font-size: 18px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 500;
 
-    &_list{
-        margin: 2px 0 0 2px;
-        position:absolute;
-        width: 10%;
-        height: 75%;
-        border: 2px solid black;
-        z-index: 1000;
-        background-color: aquamarine;
-        box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-        
     }
+
+&_selectChangeChartData{
+    width: 50%;
+}
 }
