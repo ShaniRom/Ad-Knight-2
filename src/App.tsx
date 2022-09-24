@@ -14,9 +14,9 @@ const allowedExtensions = ["csv"];
 function App() {
   const [fileAdded, setFileAdded] = useState(false);
   const [csvData, setCsvData] = useState<any>();
-  let [chartdata, setChartData] = useState<any>();
-  let [dataWifi, setDataWifi] = useState<any>([]);
-  let [dataBLE, setDataBLE] = useState<any>([]);
+  let [theChartData, setTheChartData] = useState<any>();
+  let [dataWifiAndKey, setdataWifiAndKey] = useState<any>([]);
+  let [dataBLEAndKey, setdataBLEAndKey] = useState<any>([]);
 
   function handleFilterHeaders(event_mapping: any) {
     const tempWifi: any = [];
@@ -59,15 +59,15 @@ function App() {
     const wifiData = createChartData(wifiList, "rssi_0", "MAC_1");
 
     setFileAdded(true);
-    setDataBLE(bleList);
-    setDataWifi(wifiList);
-    setChartData({ wifiData, bleData });
+    setdataBLEAndKey(bleList);
+    setdataWifiAndKey(wifiList);
+    setTheChartData({ wifiData, bleData });
   }
 
   return (
     <div className="App">
       {fileAdded ? (
-        <BarChart chartdata={chartdata} dataWifi={dataWifi} dataBLE={dataBLE} />
+        <BarChart theChartData={theChartData} dataWifiAndKey={dataWifiAndKey} dataBLEAndKey={dataBLEAndKey} />
       ) : null}
 
       {fileAdded ? null : (

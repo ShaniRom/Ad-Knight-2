@@ -2,21 +2,21 @@ import React, { useEffect } from "react";
 import createChartData from "../features/chartData";
 
 interface ChangeChartDataProps {
-  setData:Function;
-  setDataset:Function;
-  wifiBLE:boolean;
+  setRssiData:Function;
+  setMacData:Function;
+  isBleOrWifi:boolean;
 }
 
 function ChangeChartData(props: ChangeChartDataProps) {
-  const { setData ,setDataset,wifiBLE} = props;
+  const { setRssiData ,setMacData,isBleOrWifi} = props;
 
    function changeDatasets(ev: any) {
     ev.preventDefault();
 
     const newDataSetData = ev.target.elements.changeChartData.value;
     const newDataSet = ev.target.elements.changeChartDatasetBle.value;
-     setData(newDataSetData)
-     setDataset(newDataSet)
+     setRssiData(newDataSetData)
+     setMacData(newDataSet)
   }
 
   return (
@@ -33,7 +33,7 @@ function ChangeChartData(props: ChangeChartDataProps) {
         <select className="selectChartDataset" name="changeChartDatasetBle" required>
           
           <option value="MAC_1">MAC 1</option>
-          {wifiBLE?<option value="MAC_2">MAC_2</option>:null}
+          {isBleOrWifi?<option value="MAC_2">MAC_2</option>:null}
           <option value="event_id">event id</option>
         </select>
         <button type="submit">submit</button>

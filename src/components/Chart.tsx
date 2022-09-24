@@ -3,14 +3,14 @@ import { Line , getElementAtEvent, Doughnut } from "react-chartjs-2";
 
 
 interface ChartProps{
-    wifiBLE:boolean;
+    isBleOrWifi:boolean;
     wifiData:any;
     bleData:any;
 }
 
 function ChartDiv(props:ChartProps) {
 
-  const {wifiBLE,bleData,wifiData} = props;
+  const {isBleOrWifi,bleData,wifiData} = props;
 
   const [min,setMin] = useState(0);
   const [max,setMax] = useState(0);
@@ -18,6 +18,7 @@ function ChartDiv(props:ChartProps) {
 
   const chartRef:any = useRef(null);
 
+  console.log(wifiData);
   
   
 
@@ -26,7 +27,7 @@ function ChartDiv(props:ChartProps) {
     <div className="chart" id="chartImg">
         <Line style={{ width: '95%', height: 500 , opacity:0.8,backgroundColor:"black"}} 
         ref={chartRef}  
-        data={wifiBLE?wifiData:bleData}
+        data={isBleOrWifi?wifiData:bleData}
           options={{
             responsive: true,
             interaction: {
