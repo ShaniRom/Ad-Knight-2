@@ -4,7 +4,7 @@ import {findTimeFrame} from './timeRange';
 
 
 //dataset is the line
-const createChartData =  (someData : any,dataSetData:string,dataSet:string,labels:Array<any>) => {
+const createChartData =  (someData : any,dataSetData:string,dataSet:string,labels:Array<number>) => {
 
   
   const type =someData[0].wifi_ble
