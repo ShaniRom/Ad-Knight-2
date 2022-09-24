@@ -29,7 +29,9 @@ const BarChart = (props: BarChartProps) => {
   const [rssiData, setRssiData] = useState("rssi_0");
   const [macData, setMacData] = useState("MAC_1");
   const chartRef: any = useRef(null);
+  console.log(typeof(chartRef))
 console.log(wifiData)
+
   // set colors by values
   useEffect(() => {
     const wifiData = createChartData(dataWifiAndKey, rssiData, macData);
@@ -108,7 +110,7 @@ console.log(theChartData);
   return (
     <div className="main">
       {/* <List bleData={bleData} wifiData={wifiData} isBleOrWifi={isBleOrWifi} /> */}
-      <ChartDiv bleData={bleData} wifiData={wifiData} isBleOrWifi={isBleOrWifi} />
+      <ChartDiv  chartRef={chartRef} bleData={bleData} wifiData={wifiData} isBleOrWifi={isBleOrWifi} />
 
       <button name="changeBLE" onClick={changeBLE}>
         {isBleOrWifi ? "BLE" : "WIFI"}
