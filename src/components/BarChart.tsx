@@ -107,12 +107,11 @@ console.log(theChartData);
     <div className="main">
       {/* <List bleData={bleData} wifiData={wifiData} isBleOrWifi={isBleOrWifi} /> */}
       <ChartDiv bleData={bleData} wifiData={wifiData} isBleOrWifi={isBleOrWifi} />
-
-      <button name="changeBLE" onClick={changeBLE}>
+      <div className="main_filterChart">
+      
+      <button className="main_changeBLEbtn" name="changeBLE" onClick={changeBLE}>
         {isBleOrWifi ? "BLE" : "WIFI"}
       </button>
-
-      {/* <Table chartClicked={chartClicked} chartData={chartData} keysOfObj={keysOfObj} /> */}
 
       <ChangeChartData
         isBleOrWifi={isBleOrWifi}
@@ -127,8 +126,12 @@ console.log(theChartData);
       </button>
       <button onClick={handleDownloadToImg}>Download To Image</button>
       </div>
-    
+    </div>
   );
 };
+      
+
+      {/* <Table chartClicked={chartClicked} chartData={chartData} keysOfObj={keysOfObj} /> */}
+
 
 export default BarChart;
