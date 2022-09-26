@@ -7,7 +7,7 @@ import {useRef,useEffect,useState} from 'react'
 // import zoomPlugin from 'chartjs-plugin-zoom';
 // ChartJS.register(zoomPlugin)
 
-//v4 -in order to improve performance, offer new features, and improve maintainability
+///////v4 -in order to improve performance and maintainability
 import { Chart} from 'react-chartjs-2';
 import { Chart as ChartJS, LineController, LineElement, PointElement, LinearScale, Title, registerables } from 'chart.js';
 
