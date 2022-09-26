@@ -1,5 +1,8 @@
 import {useRef,useEffect,useState} from 'react'
 // import { Line , getElementAtEvent, Doughnut } from "react-chartjs-2";
+// import { Chart as ChartJS } from 'chart.js';
+// import {Chart,registerables} from 'chart.js'
+// Chart.register(...registerables)
 
 // import zoomPlugin from 'chartjs-plugin-zoom';
 // ChartJS.register(zoomPlugin)
