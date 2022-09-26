@@ -1,8 +1,15 @@
 import {useRef,useEffect,useState} from 'react'
-import { Line , getElementAtEvent, Doughnut } from "react-chartjs-2";
-import { Chart as ChartJS} from 'chart.js';
-import zoomPlugin from 'chartjs-plugin-zoom';
-ChartJS.register(zoomPlugin)
+// import { Line , getElementAtEvent, Doughnut } from "react-chartjs-2";
+
+// import zoomPlugin from 'chartjs-plugin-zoom';
+// ChartJS.register(zoomPlugin)
+
+//v4 -in order to improve performance, offer new features, and improve maintainability
+import { Chart} from 'react-chartjs-2';
+import { Chart as ChartJS, LineController, LineElement, PointElement, LinearScale, Title, registerables } from 'chart.js';
+
+ChartJS.register(LineController, LineElement, PointElement, LinearScale, Title,...registerables);
+
 
 
 interface ChartProps{
@@ -29,7 +36,8 @@ function ChartDiv(props:ChartProps) {
   return (
 
     <div className="chart" id="chartImg">
-        <Line style={{ width: '100%', height: 100 , opacity:0.8,backgroundColor:"black"}} 
+        <Chart type='line' 
+        style={{ width: '100%', height: 100 , opacity:0.8,backgroundColor:"black"}} 
         ref={chartRef}  
         data={isBleOrWifi?wifiData:bleData}
           options={{

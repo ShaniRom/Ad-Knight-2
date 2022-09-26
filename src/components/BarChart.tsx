@@ -2,14 +2,12 @@ import { useState, useEffect, useRef } from "react";
 import Papa from "papaparse";
 // import CSVDownloader from "./CSVDownloader";
 import createChartData from "../features/chartData";
-import { Line, getElementAtEvent, Doughnut } from "react-chartjs-2";
-import { Chart, registerables } from "chart.js";
+// import { Line, getElementAtEvent, Doughnut } from "react-chartjs-2";
 import "../style/style.scss";
 import Table from "./Table";
-
 import ChangeChartData from "./ChangeChartData";
 import ChartDiv from "./Chart";
-Chart.register(...registerables);
+
 
 interface BarChartProps {
   theChartData: any;
@@ -39,13 +37,13 @@ const BarChart = (props: BarChartProps) => {
 
   // get chart data for table
 
-  const getChart = async (ev: any) => {
-    const chosenChart = getElementAtEvent(chartRef.current, ev);
-    const index = chosenChart[0].index;
+  // const getChart = async (ev: any) => {
+  //   const chosenChart = getElementAtEvent(chartRef.current, ev);
+  //   const index = chosenChart[0].index;
 
-    await getChartData(index);
-    setChartClicked(true);
-  };
+  //   await getChartData(index);
+  //   setChartClicked(true);
+  // };
 
   async function getChartData(index: any) {
     let chartData;
