@@ -115,7 +115,7 @@ export const filterDataToSelect = (list: Array<any>) => {
   let letters: Array<string> = [];
   let numbersAndLetters: Array<string> = [];
   
-  dataList.length = 100
+ dataList.length = 500
 
   Object.keys(list[0]).map((elm: any) => {
     listKeys = [...listKeys, elm];
