@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect ,useState} from "react";
 import {filterDataToSelect} from '../features/filter'
 // import ObjectModel from '../models/ObjectModelBLE'
 
@@ -15,11 +15,14 @@ interface ChangeChartDataProps {
 function ChangeChartData(props: ChangeChartDataProps) {
   const { setDataSet ,setYdata,isBleOrWifi,dataBLEAndKey,dataWifiAndKey} = props;
 
+    const bleOptions = filterDataToSelect(dataBLEAndKey)
+    const wifiOptions = filterDataToSelect(dataWifiAndKey)
 
+    console.log('ble',bleOptions);
+    console.log('wifi',wifiOptions);
+    
+  
 
-
-  const lala = filterDataToSelect(dataBLEAndKey)
-  // const lalas = filterDataToSelect(dataWifi)
    function changeDatasets(ev: any) {
     ev.preventDefault();
     
@@ -33,22 +36,37 @@ function ChangeChartData(props: ChangeChartDataProps) {
     <>
       <form className="form" onSubmit={changeDatasets}>
 
+        
+      
         <label htmlFor="changeChartData">select data:
 
         <select className="form_selectChangeChartData" name="changeChartData" required>
-          <option value="rssi_0">rssi 0</option>
-          <option value="rssi_1">rssi 1</option>
-          <option value="rssi_2">rssi 2</option>
+        {isBleOrWifi?wifiOptions.numbersList.map((option:any,i:number) => {
+        return(
+          <option key={i} value={option}>{option}</option>
+        )
+      }):bleOptions.numbersList.map((option:any,i:number) => {
+        return(
+          <option key={i} value={option}>{option}</option>
+        )
+      })}
         </select>
+
+
         </label>
 
         <label htmlFor="changeChartDataset">select Data set:
 
         <select className="form_selectChangeChartData" name="changeChartDataset" required>
-
-          <option value="MAC_1">MAC 1</option>
-          {isBleOrWifi?<option value="MAC_2">MAC_2</option>:null}
-          <option value="event_id">event id</option>
+        {isBleOrWifi?wifiOptions.newNumersAndLetters.map((option:any,i:number) => {
+        return(
+          <option key={i} value={option}>{option}</option>
+        )
+      }):bleOptions.newNumersAndLetters.map((option:any,i:number) => {
+        return(
+          <option key={i} value={option}>{option}</option>
+        )
+      })}
         </select>
         </label>
         <button type="submit">submit</button>

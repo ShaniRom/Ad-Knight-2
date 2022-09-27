@@ -100,15 +100,14 @@ const BarChart = (props: BarChartProps) => {
     setisBleOrWifi(!isBleOrWifi);
   }
 
-console.log(theChartData);
-
-
   return (
     <div className="main">
       {/* <List bleData={bleData} wifiData={wifiData} isBleOrWifi={isBleOrWifi} /> */}
+
       <ChartDiv bleData={bleData} wifiData={wifiData} isBleOrWifi={isBleOrWifi} />
-      <div className="main_filterChart">
       
+      <div className="main_filterChart">
+
       <button className="main_changeBLEbtn" name="changeBLE" onClick={changeBLE}>
         {isBleOrWifi ? "BLE" : "WIFI"}
       </button>

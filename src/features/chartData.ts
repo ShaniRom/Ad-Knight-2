@@ -11,14 +11,13 @@ const createChartData =  (someData : any,dataSetData:string,dataSet:string) => {
   const labelsList =  findTimeFrame(someData);
   const backGroundColor = getColors(dataSetList);
 
- 
   
   const data = {
 
     labels: labelsList.map((date:any) =>  ` ${date.hours}` + " " +
     `:0${date.minutes}:0${date.seconds}`),
     datasets: dataSetList.map((line: any,i:number) => {
-      
+
       return {
         label: line.chosendataSet + " " + type + " "+ dataSetData,
         data:  line.objArray.map((data: any) => data[`${dataSetData}`]),
@@ -28,6 +27,8 @@ const createChartData =  (someData : any,dataSetData:string,dataSet:string) => {
       };
     }),
   }
+  
+  
   return data;
 
 }
@@ -43,7 +44,7 @@ const createChartData =  (someData : any,dataSetData:string,dataSet:string) => {
 
       datasets: [{
         label: `${someData[0].wifi_ble}`,
-        data: [-60, -55, -50, -45, -40, -35, -30],
+        data: [-60,-65,-70,-75,-80,-95],
         fill: false,
         borderColor: 'rgb(75, 192, 192)',
         tension: 0.1
