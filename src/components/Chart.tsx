@@ -13,12 +13,9 @@ interface ChartProps{
 }
 
 function ChartDiv(props: ChartProps) {
-  const { isBleOrWifi, bleData, wifiData } = props;
-
   const {isBleOrWifi,bleData,wifiData,chartRef} = props;
   const [min, setMin] = useState<number>(0);
   const [max, setMax] = useState<number>(0);
-  const chartRef: any = useRef(null);
 
   useEffect(() => {
 
