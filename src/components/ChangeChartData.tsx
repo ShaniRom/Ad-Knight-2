@@ -18,13 +18,19 @@ function ChangeChartData(props: ChangeChartDataProps) {
   const { setDataSet ,setYdata,isBleOrWifi,dataBLEAndKey,data,dataWifiAndKey,setLabels} = props;
 
   const [chosenTime, setChosenTime] = useState<Array<object>>([]);
-  
+ console.log(dataBLEAndKey)
   useEffect(() => {
-    const timestamp = findTimeFrame(data);
+    if(isBleOrWifi){
+      const timestamp = findTimeFrame(dataWifiAndKey);
     setChosenTime(timestamp);
+    }else{
+      const timestamp = findTimeFrame(dataBLEAndKey);
+      setChosenTime(timestamp);
+    }
+  
   }, []);
 
-
+ 
 
 
   const lala = filterDataToSelect(dataBLEAndKey)
