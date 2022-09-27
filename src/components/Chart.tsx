@@ -4,15 +4,18 @@ import { Chart as ChartJS } from "chart.js";
 import zoomPlugin from "chartjs-plugin-zoom";
 ChartJS.register(zoomPlugin);
 
-interface ChartProps {
-  isBleOrWifi: boolean;
-  wifiData: any;
-  bleData: any;
+
+interface ChartProps{
+    isBleOrWifi:boolean;
+    wifiData:any;
+    bleData:any;
+    chartRef:any
 }
 
 function ChartDiv(props: ChartProps) {
   const { isBleOrWifi, bleData, wifiData } = props;
 
+  const {isBleOrWifi,bleData,wifiData,chartRef} = props;
   const [min, setMin] = useState<number>(0);
   const [max, setMax] = useState<number>(0);
   const chartRef: any = useRef(null);

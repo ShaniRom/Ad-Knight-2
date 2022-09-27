@@ -89,16 +89,16 @@ export const filterDataSet = (list: Array<any>, dataset: string) => {
     (n: any, i: any) => datasetList.indexOf(n) === i
   );
 
-  let allMacObj: any = [];
+  let alldatasetObj: any = [];
   datasetListArray.map((line: any) => {
     const tempObj = {
       chosendataSet: line,
       objArray: list.filter((obj: any) => obj[`${dataset}`] === line),
     };
-    allMacObj = [...allMacObj, tempObj];
+    alldatasetObj = [...alldatasetObj, tempObj];
   });
 
-  return allMacObj;
+  return alldatasetObj;
 };
 
 export const filterDataToSelect = (list: Array<any>) => {

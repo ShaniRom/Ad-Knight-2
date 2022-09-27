@@ -1,6 +1,7 @@
-import React, { useEffect ,useState} from "react";
+import React, { useEffect, useState } from "react";
+import createChartData from "../features/chartData";
+import { findTimeFrame } from "../features/timeRange";
 import {filterDataToSelect} from '../features/filter'
-// import ObjectModel from '../models/ObjectModelBLE'
 
 
 interface ChangeChartDataProps {
@@ -9,20 +10,31 @@ interface ChangeChartDataProps {
   isBleOrWifi:boolean;
   dataBLEAndKey:Array<any>;
   dataWifiAndKey:Array<any>;
-
+  data: Array<any>;
+  setLabels:Function
 }
 
 function ChangeChartData(props: ChangeChartDataProps) {
-  const { setDataSet ,setYdata,isBleOrWifi,dataBLEAndKey,dataWifiAndKey} = props;
+  const { setDataSet ,setYdata,isBleOrWifi,dataBLEAndKey,data,dataWifiAndKey,setLabels} = props;
 
     const bleOptions = filterDataToSelect(dataBLEAndKey)
     const wifiOptions = filterDataToSelect(dataWifiAndKey)
+  const [chosenTime, setChosenTime] = useState<Array<object>>([]);
+  
+  useEffect(() => {
+    const timestamp = findTimeFrame(data);
+    setChosenTime(timestamp);
+  }, []);
 
     console.log('ble',bleOptions);
     console.log('wifi',wifiOptions);
     
   
 
+
+
+  const lala = filterDataToSelect(dataBLEAndKey)
+  // const lalas = filterDataToSelect(dataWifi)
    function changeDatasets(ev: any) {
     ev.preventDefault();
     
@@ -30,6 +42,16 @@ function ChangeChartData(props: ChangeChartDataProps) {
     const newDataSet = ev.target.elements.changeChartDataset.value;
     setYdata(newDataSetData)
      setDataSet(newDataSet)
+  }
+  function filterByChosenTS(ev: any) {
+    ev.preventDefault();
+    const minimumTS=parseInt(ev.target.elements.minTS.value)
+    const maximumTS=parseInt(ev.target.elements.maxTS.value)
+    console.log( typeof(maximumTS))
+    
+    const chosenTS= chosenTime.slice(minimumTS,maximumTS+1);
+    setLabels(chosenTS)
+   
   }
 
   return (
@@ -68,6 +90,34 @@ function ChangeChartData(props: ChangeChartDataProps) {
         )
       })}
         </select>
+        </label>
+        <button type="submit">submit</button>
+      </form>
+
+      <form  className="form" onSubmit={filterByChosenTS}>
+        <label htmlFor="minTS">
+          Choose minimum:
+          <select className="selectMinTS" name="minTS">
+            {chosenTime.map((time: any, i: number) => {
+              return (
+                <option key={i} value={i}>
+                  {time.hours}:{time.minutes}:{time.seconds}
+                </option>
+              );
+            })}
+          </select>
+        </label>
+        <label htmlFor="maxTS">
+          Choose maximum:
+          <select className="selectMaxTS" name="maxTS">
+            {chosenTime.map((time: any, i: number) => {
+              return (
+                <option key={i} value={i}>
+                  {time.hours}:{time.minutes}:{time.seconds}
+                </option>
+              );
+            })}
+          </select>
         </label>
         <button type="submit">submit</button>
       </form>

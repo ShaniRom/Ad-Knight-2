@@ -1,6 +1,6 @@
 export function findTimeFrame(someData: any) {
   let timeList: any = [];
-
+  console.log(someData)
   someData.forEach((data: any) => {
     timeList.push(data.date);
   });
