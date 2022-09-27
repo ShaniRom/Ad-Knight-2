@@ -1,3 +1,4 @@
+import { parse } from "papaparse";
 import getDate from "./getDate";
 
 export function filterData(dataSaved: any, keysBLE: any, keysWIFI: any) {
@@ -15,6 +16,8 @@ export function filterData(dataSaved: any, keysBLE: any, keysWIFI: any) {
 }
 
 function filterWithKeys(
+
+  
   filteredBLE: any,
   filteredWIFI: any,
   keysBLE: any,
@@ -66,35 +69,12 @@ function filterWithKeys(
     tempObj.date = dateFound;
     wifiData = [...wifiData, tempObj];
   }
+  
   return { wifiData, BLEData };
 }
 
 // -------------------------------------------------------
 
-//tals code
-
-// export const filterByMac1 = (list: Array<any>) => {
-//   const mac1List = list.map((data: any) => data.MAC_1);
-
-//   // const mac1ListArray = mac1List.filter(
-//   //   //     (n: any, i: any) => mac1List.indexOf(n) === i
-//   //   //   ).filter(
-//   //   (n: any, i: any) => mac1List.indexOf(n) === i
-//   // );
-//   let mac1ListArray = new Set();
-//   mac1List.forEach((mac1) => mac1ListArray.add(mac1));
-
-//   // const mac1ListArray2 = Array.from(mac1ListArray);
-// let result:any[] = [];
-//   const allMacObj = mac1ListArray.forEach((mac1: any) => {
-//     result = [...result,  {
-//       mac1Value: mac1,
-//       objArray: list.filter((obj: any) => obj.MAC_1 === mac1),
-//     }];
-//   });
-
-//   return result;
-// };
 
 export const filterDataSet = (list: Array<any>, dataset: string) => {
   
@@ -123,41 +103,146 @@ export const filterDataSet = (list: Array<any>, dataset: string) => {
 
 export const filterDataToSelect = (list: Array<any>) => {
 
-  console.log(list);
-  
   const numbersCheck = new RegExp(/^[(-9)-9.,]+$/);
   const lettersCheck = new RegExp(/^[a-zA-Z\s.,]+$/);
-  const specialChars = new RegExp(/^[a-zA-Z\s.,]+$/);
+  const bothCheck = new RegExp(/^[A-Za-z0-9]*$/);
+  const speaceCheck = new RegExp(/^\s*$/);
+  const specialCharsCheck = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
   
+  const dataList = list
   let listKeys: Array<string> = [];
-  let numbers: Array<String> = [];
+  let numbers: Array<string> = [];
   let letters: Array<string> = [];
-  let filteredList: Array<string> = [];
   let numbersAndLetters: Array<string> = [];
-  // check negative /^-\d+$/
+  
+  dataList.length = 100
 
   Object.keys(list[0]).map((elm: any) => {
     listKeys = [...listKeys, elm];
   });
+
   
-  listKeys.forEach((key: string) => {
 
-      const tempValue = list[0][`${key}`];
+  listKeys.map((key: string,i:number) => {
 
-      if (numbersCheck.test(tempValue)) {
-        numbers = [...numbers, key];
-      } else if (lettersCheck.test(tempValue) || specialChars.test(tempValue)) {
-        letters = [...letters, key];
-      } else {
+    dataList.forEach((obj:any,i:number) => {
+
+      const tempValue = obj[`${key}`];
+
+      if (speaceCheck.test(tempValue)) return;
+      if (numbersCheck.test(tempValue)){
+        
+        numbers = [...numbers, key]
+      } else if(lettersCheck.test(tempValue)){
+        
+        letters = [...letters, key]
+      }else if(bothCheck.test(tempValue)){
         numbersAndLetters = [...numbersAndLetters, key];
       }
 
+    })
     
-})
+    
+  });
 
-  console.log('numbers',numbers);
-  console.log('letters',letters);
-  console.log('both',numbersAndLetters);
+  
+  
+  
+  const tempNumbers = numbers.filter((n, i) => numbers.indexOf(n) === i);
+  const tempLetters= letters.filter((n, i) => letters.indexOf(n) === i);
+  const tempNumersAndLetters = numbersAndLetters.filter((n, i) => numbersAndLetters.indexOf(n) === i);
+
+
+  let newLetters:Array<string> = []
+  let newNumersAndLetters:Array<string> = []
+  let newNumbers:Array<string> = []
+
+
+  tempLetters.map((key:string) => {
     
+      const tempkeyArray = dataList.map((obj: any) => {
+          return obj[`${key}`];
+        });
+    const sameValues = tempkeyArray.every((val, i, arr) => val === arr[0]);
+
+    if(!sameValues){
+      newLetters = [...newLetters,key]
+    }
+  })
+
+
+  tempNumersAndLetters.map((key:string) => {
+    
+    const tempkeyArray = dataList.map((obj: any) => {
+          return obj[`${key}`];
+        })
+
+    const sameValues = tempkeyArray.every((val, i, arr) => val === arr[0]);
+
+    if(!sameValues){
+      newNumersAndLetters = [...newNumersAndLetters,key]
+    }
+
+  })
+
+
+   tempNumbers.map((key:string) => {
+    const tempkeyArray = dataList.map((obj: any) => {
+          return obj[`${key}`];
+        });
+    const sameValues = tempkeyArray.every((val, i, arr) => val === arr[0]);
+
+      if(!sameValues){
+        newNumbers = [...newNumbers,key]
+      }
+
+  })
+  
+  
+  let numbersList = newNumbers
+  let indexToRemove:Array<any> = [];
+
+   newNumbers.map((key:any,i:number) => {
+
+    if(key){
+
+      dataList.forEach((obj:any) => {
+
+        const value = obj[`${key}`]
+
+        if(obj[`${key}`].length > 5 && specialCharsCheck.test(value) === false ){
+
+          newNumersAndLetters = [...newNumersAndLetters,key]
+          indexToRemove = [...indexToRemove,i]
+        }else{
+          return;
+        }
+      })
+
+    }
+    
+    })
+
+
+    indexToRemove = indexToRemove.filter((x, i, a) => a.indexOf(x) == i)
+    
+    indexToRemove.forEach((index:number) => numbersList.splice(index,1))
+    newNumersAndLetters = newNumersAndLetters.filter((x, i, a) => a.indexOf(x) == i)
+   
+
+    // console.log('----------------------');
+    
+    // console.log("numbers",numbersList);
+    // console.log("letters",newLetters);
+    // console.log("numbersandletters",newNumersAndLetters);
+    
+    
+    
+  return {numbersList,newLetters,newNumersAndLetters}
 
 }
+
+  
+
+
+

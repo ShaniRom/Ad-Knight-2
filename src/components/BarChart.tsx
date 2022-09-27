@@ -92,8 +92,6 @@ const BarChart = (props: BarChartProps) => {
     setisBleOrWifi(!isBleOrWifi);
   }
 
-  console.log(theChartData);
-
   return (
     <div className="main">
       {/* <List bleData={bleData} wifiData={wifiData} isBleOrWifi={isBleOrWifi} /> */}
