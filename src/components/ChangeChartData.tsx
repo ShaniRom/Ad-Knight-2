@@ -20,6 +20,9 @@ function ChangeChartData(props: ChangeChartDataProps) {
     const bleOptions = filterDataToSelect(dataBLEAndKey)
     const wifiOptions = filterDataToSelect(dataWifiAndKey)
   const [chosenTime, setChosenTime] = useState<Array<object>>([]);
+
+  
+  
   
   useEffect(() => {
     const timestamp = findTimeFrame(data);
@@ -33,8 +36,6 @@ function ChangeChartData(props: ChangeChartDataProps) {
 
 
 
-  const lala = filterDataToSelect(dataBLEAndKey)
-  // const lalas = filterDataToSelect(dataWifi)
    function changeDatasets(ev: any) {
     ev.preventDefault();
     
@@ -43,6 +44,8 @@ function ChangeChartData(props: ChangeChartDataProps) {
     setYdata(newDataSetData)
      setDataSet(newDataSet)
   }
+
+
   function filterByChosenTS(ev: any) {
     ev.preventDefault();
     const minimumTS=parseInt(ev.target.elements.minTS.value)

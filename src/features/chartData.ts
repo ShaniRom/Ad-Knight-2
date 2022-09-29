@@ -9,7 +9,6 @@ const createChartData =  (someData : any,dataSetData:string,dataSet:string,label
   const type =someData[0].wifi_ble;
   const dataSetList =  filterDataSet(someData,dataSet);
 
-
   const backGroundColor = getColors(dataSetList);
 
   
@@ -39,6 +38,7 @@ const createChartData =  (someData : any,dataSetData:string,dataSet:string,label
     const labelsList =  findTimeFrame(someData);
 
     const data = {
+
       labels: labelsList.map((date:any) =>  ` ${date.hours}` + " " +
       `:0${date.minutes}:0${date.seconds}`),
 

@@ -1,6 +1,8 @@
+
 export function findTimeFrame(someData: any) {
   let timeList: any = [];
   console.log(someData)
+
   someData.forEach((data: any) => {
     timeList.push(data.date);
   });
@@ -20,6 +22,7 @@ export function findTimeFrame(someData: any) {
       ) === i
     );
   });
-
+  console.log(timeRange);
+  
   return timeRange;
 }
