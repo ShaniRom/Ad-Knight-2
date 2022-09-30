@@ -131,12 +131,12 @@ export const filterDataToSelect = (list: Array<any>) => {
 
       if (speaceCheck.test(tempValue)) return;
       if (numbersCheck.test(tempValue)){
-        
+        // if(key === "MAC_2") return
         numbers = [...numbers, key]
       } else if(lettersCheck.test(tempValue)){
         
         letters = [...letters, key]
-      }else if(bothCheck.test(tempValue)){
+      }else if(bothCheck.test(tempValue) ){
         numbersAndLetters = [...numbersAndLetters, key];
       }
 
