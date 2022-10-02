@@ -116,8 +116,8 @@ const BarChart = (props: BarChartProps) => {
           isBleOrWifi={isBleOrWifi}
           dataBLEAndKey={dataBLEAndKey}
           dataWifiAndKey={dataWifiAndKey}
-          data={isBleOrWifi?dataWifiAndKey:dataBLEAndKey}
-         setLabels={setLabels}
+          dataSet={dataSet}
+          setLabels={setLabels}
         />
 
         <button onClick={(CSVdata) => handleDownload(CSVdata)}>

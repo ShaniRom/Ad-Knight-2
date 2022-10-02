@@ -47,8 +47,8 @@ function App() {
     const newData: Array<ObjectModel> = data;
 
     const { tempWifi, tempBLE } = handleFilterHeaders(event_mapping);
-
-    newData.length = 500;
+    
+    newData.length = 10000;
 
     const result = filterData(newData, tempBLE, tempWifi);
 

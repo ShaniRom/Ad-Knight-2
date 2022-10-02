@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import createChartData from "../features/chartData";
 import { findTimeFrame } from "../features/timeRange";
-import {filterDataToSelect} from '../features/filter'
+import {filterDataToSelect,filterDataSet} from '../features/filter'
 
 
 interface ChangeChartDataProps {
@@ -10,23 +9,37 @@ interface ChangeChartDataProps {
   isBleOrWifi:boolean;
   dataBLEAndKey:Array<any>;
   dataWifiAndKey:Array<any>;
-  data: Array<any>;
+  dataSet: string
   setLabels:Function
 }
 
 function ChangeChartData(props: ChangeChartDataProps) {
-  const { setDataSet ,setYdata,isBleOrWifi,dataBLEAndKey,data,dataWifiAndKey,setLabels} = props;
+
+
+  const { setDataSet ,setYdata,isBleOrWifi,dataBLEAndKey,dataSet,dataWifiAndKey,setLabels} = props;
+
+  const [chosenTime, setChosenTime] = useState<Array<object>>([]);
+const [chosenDS , setChosetDateSet] = useState<any>([])
+
 
     const bleOptions = filterDataToSelect(dataBLEAndKey)
     const wifiOptions = filterDataToSelect(dataWifiAndKey)
-  const [chosenTime, setChosenTime] = useState<Array<object>>([]);
- console.log(dataBLEAndKey)
+    
+console.log(chosenDS);
+
+ 
+
   useEffect(() => {
     if(isBleOrWifi){
       const timestamp = findTimeFrame(dataWifiAndKey);
+      const selectedDS = filterDataSet(dataWifiAndKey,dataSet)
+      
     setChosenTime(timestamp);
     }else{
       const timestamp = findTimeFrame(dataBLEAndKey);
+      const selectedDS = filterDataSet(dataBLEAndKey,dataSet)
+      console.log(selectedDS);
+      setChosetDateSet(selectedDS)
       setChosenTime(timestamp);
     }
   
@@ -36,10 +49,6 @@ function ChangeChartData(props: ChangeChartDataProps) {
     console.log('wifi',wifiOptions);
     
   
-
-
-  const lala = filterDataToSelect(dataBLEAndKey)
-  // const lalas = filterDataToSelect(dataWifi)
    function changeDatasets(ev: any) {
     ev.preventDefault();
     
@@ -63,16 +72,14 @@ function ChangeChartData(props: ChangeChartDataProps) {
     <>
       <form className="form" onSubmit={changeDatasets}>
 
-        
-      
         <label htmlFor="changeChartData">select data:
-
+        
         <select className="form_selectChangeChartData" name="changeChartData" required>
-        {isBleOrWifi?wifiOptions.numbersList.map((option:any,i:number) => {
+        {isBleOrWifi?wifiOptions.newNumbers.map((option:any,i:number) => {
         return(
           <option key={i} value={option}>{option}</option>
         )
-      }):bleOptions.numbersList.map((option:any,i:number) => {
+      }):bleOptions.newNumbers.map((option:any,i:number) => {
         return(
           <option key={i} value={option}>{option}</option>
         )
@@ -85,11 +92,11 @@ function ChangeChartData(props: ChangeChartDataProps) {
         <label htmlFor="changeChartDataset">select Data set:
 
         <select className="form_selectChangeChartData" name="changeChartDataset" required>
-        {isBleOrWifi?wifiOptions.newNumersAndLetters.map((option:any,i:number) => {
+        {isBleOrWifi?wifiOptions.numbersAndLetters.map((option:any,i:number) => {
         return(
           <option key={i} value={option}>{option}</option>
         )
-      }):bleOptions.newNumersAndLetters.map((option:any,i:number) => {
+      }):bleOptions.numbersAndLetters.map((option:any,i:number) => {
         return(
           <option key={i} value={option}>{option}</option>
         )
@@ -126,6 +133,13 @@ function ChangeChartData(props: ChangeChartDataProps) {
         </label>
         <button type="submit">submit</button>
       </form>
+
+      <div className="main_selectedDS">
+        {chosenDS.map((DS:object,i:number) => {
+          // <span>{DS["chosenDataSet"]}</span>
+        })}
+
+      </div>
     </>
   );
 }

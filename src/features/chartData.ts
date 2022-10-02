@@ -8,8 +8,6 @@ const createChartData =  (someData : any,dataSetData:string,dataSet:string,label
 
   const type =someData[0].wifi_ble;
   const dataSetList =  filterDataSet(someData,dataSet);
-
-
   const backGroundColor = getColors(dataSetList);
 
   
