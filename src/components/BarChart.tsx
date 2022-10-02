@@ -1,13 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import Papa from "papaparse";
 // import CSVDownloader from "./CSVDownloader";
-import createChartData from "../features/chartData";
+import createChartData,{chosenLineChart} from "../features/chartData";
 // import { Line, getElementAtEvent, Doughnut } from "react-chartjs-2";
 import "../style/style.scss";
 import Table from "./Table";
 import ChangeChartData from "./ChangeChartData";
 import ChartDiv from "./Chart";
-
 
 interface BarChartProps {
   theChartData: any;
@@ -16,34 +15,50 @@ interface BarChartProps {
 }
 
 const BarChart = (props: BarChartProps) => {
+
   const { theChartData, dataWifiAndKey, dataBLEAndKey } = props;
 
-  let [chartClicked, setChartClicked] = useState(false);
-  const [isBleOrWifi, setisBleOrWifi] = useState(false);
-  // let [chartData, setChartData] = useState<any>(chartdata);
-  const [labels,setLabels]=useState([])
-  const [wifiData, setWifiData] = useState<any>(theChartData.wifiData);
-  const [bleData, setBleData] = useState<any>(theChartData.bleData);
-  const [Ydata, setYdata] = useState("rssi_0");
-  const [dataSet, setDataSet] = useState("MAC_1");
-  const chartRef: any = useRef(null);
+  
+  let [chartClicked, setChartClicked] = useState(false)
+  const [isBleOrWifi, setisBleOrWifi] = useState(false)
+  const [labels, setLabels] = useState([])
+  const [wifiData, setWifiData] = useState<any>(theChartData.wifiData)
+  const [bleData, setBleData] = useState<any>(theChartData.bleData)
+  const [choseOne,setChoseOne] = useState(false)
+  const [Ydata, setYdata] = useState("rssi_0")
+  const [dataSet, setDataSet] = useState("MAC_1")
+  const chartRef: any = useRef(null)
+  const [chosenDS , setChosetDateSet] = useState<any>([]);
+  const [selectedDS, setselectedDS] = useState<any>({})
 
+  console.log(chosenDS);
+  
+  
   useEffect(() => {
-    const wifiData = createChartData(dataWifiAndKey, Ydata, dataSet,labels);
-    const bleData = createChartData(dataBLEAndKey, Ydata, dataSet,labels);
-    setWifiData(wifiData);
-    setBleData(bleData);
-  }, [Ydata, dataSet, isBleOrWifi,labels]);
+    if(choseOne){
+      if(isBleOrWifi){
+        const lala = chosenLineChart(selectedDS,dataWifiAndKey,Ydata)
+        console.log(lala);
+        
+        setWifiData(lala)
+        
+        setChoseOne(false)
+      }else{
+        const lala = chosenLineChart(selectedDS,dataBLEAndKey,Ydata)
+        setBleData(lala)
+        setChoseOne(false)
+      }
+    }else{
+      const wifiData = createChartData(dataWifiAndKey, Ydata, dataSet, labels);
+      const bleData = createChartData(dataBLEAndKey, Ydata, dataSet, labels);
+      setWifiData(wifiData);
+      setBleData(bleData);
+    }
+    
+    
+    
+  }, [Ydata, dataSet, isBleOrWifi, labels,selectedDS,chosenDS])
 
-  // get chart data for table
-
-  // const getChart = async (ev: any) => {
-  //   const chosenChart = getElementAtEvent(chartRef.current, ev);
-  //   const index = chosenChart[0].index;
-
-  //   await getChartData(index);
-  //   setChartClicked(true);
-  // };
 
   async function getChartData(index: any) {
     let chartData;
@@ -118,6 +133,12 @@ const BarChart = (props: BarChartProps) => {
           dataWifiAndKey={dataWifiAndKey}
           dataSet={dataSet}
           setLabels={setLabels}
+          setChoseOne={setChoseOne}
+          setWifiData={setWifiData}
+          setBleData={setBleData}
+          setChosetDateSet={setChosetDateSet}
+          chosenDS={chosenDS}
+          setselectedDS={setselectedDS}
         />
 
         <button onClick={(CSVdata) => handleDownload(CSVdata)}>

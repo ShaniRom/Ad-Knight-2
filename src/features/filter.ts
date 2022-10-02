@@ -84,7 +84,7 @@ export const filterDataSet = (list: Array<any>, dataset: string) => {
   const datasetListArray = datasetList.filter(
     (n: any, i: any) => datasetList.indexOf(n) === i
   );
-
+  
   let alldatasetObj: any = [];
   datasetListArray.map((line: any) => {
     const tempObj = {
@@ -94,11 +94,11 @@ export const filterDataSet = (list: Array<any>, dataset: string) => {
     alldatasetObj = [...alldatasetObj, tempObj];
   });
 
-  
   return alldatasetObj;
 };
 
 export const filterDataToSelect = (list: Array<any>) => {
+
   const numbersCheck = new RegExp(/^[(-9)-9.,]+$/);
   const lettersCheck = new RegExp(/^[a-zA-Z\s.,]+$/);
   const bothCheck = new RegExp(/^[A-Za-z0-9]*$/);

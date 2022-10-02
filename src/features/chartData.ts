@@ -2,14 +2,15 @@ import { filterDataSet } from "./filter";
 import { getColors } from "./colors";
 import {findTimeFrame} from './timeRange';
 import ObjectModel from "../models/ObjectModelBLE";
+import { Logger } from "sass";
 
 //dataset is the line
 const createChartData =  (someData : any,dataSetData:string,dataSet:string,labels:Array<number>) => {
 
+  
   const type =someData[0].wifi_ble;
   const dataSetList =  filterDataSet(someData,dataSet);
   const backGroundColor = getColors(dataSetList);
-
   
   const data = {
     labels: labels.map((date:any) =>  ` ${date.hours}` + " " +
@@ -35,6 +36,7 @@ const createChartData =  (someData : any,dataSetData:string,dataSet:string,label
   export const defaultChartData = (someData : Array<ObjectModel>) => {
 
     const labelsList =  findTimeFrame(someData);
+    
 
     const data = {
       labels: labelsList.map((date:any) =>  ` ${date.hours}` + " " +
@@ -53,6 +55,55 @@ const createChartData =  (someData : any,dataSetData:string,dataSet:string,label
     return data;
   
   }
+
+
+
+export const chosenLineChart = (selectedDS:any,list:Array<any>,yData:string) => {
+
+  const dataArray = selectedDS.objArray
+  const dataSet = selectedDS.chosendataSet
+  const labelsList =  findTimeFrame(list);
+  
+  console.log(labelsList);
+  
+      const data = {
+        labels: labelsList.map((date:any) =>  ` ${date.hours}` + " " +
+        `:0${date.minutes}:0${date.seconds}`),
+        datasets:[{ 
+            label: dataSet,
+            data:  dataArray.map((data: any) => Number(data[`${yData}`])),
+            border:"2px solid green",
+            backgroundColor: "green",
+            tension:0.4
+          }]
+        }
+        return data;
+      }
+      
+      
+      
+    
+    
+   
+    
+        
+  //   const data = {
+  //     labels: chosenTime.map((date:any) =>  ` ${date.hours}` + " " +
+  //     `:0${date.minutes}:0${date.seconds}`),
+
+  //     datasets: {
+  //       label: selectedDS.chosendataSet,
+  //         data:  selectedDS.objArray.map((data: any) =>  Number(data["rssi_0"])),
+  //         backgroundcolor: 'green',
+  //         tension:0.4
+  //     }
+  //   }
+  
+    
+      
+  //   return data;
+  
+  // }
 
 
 
