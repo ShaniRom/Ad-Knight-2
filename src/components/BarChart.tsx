@@ -11,12 +11,14 @@ import ChartDiv from "./Chart";
 interface BarChartProps {
   theChartData: any;
   dataWifiAndKey: Array<string>;
-  dataBLEAndKey: Array<string>;
+  dataBLEAndKey: Array<string>; 
+  setDataAmount:Function;
+  
 }
 
 const BarChart = (props: BarChartProps) => {
 
-  const { theChartData, dataWifiAndKey, dataBLEAndKey } = props;
+  const { theChartData, dataWifiAndKey, dataBLEAndKey,setDataAmount } = props;
 
   
   let [chartClicked, setChartClicked] = useState(false)
@@ -31,6 +33,7 @@ const BarChart = (props: BarChartProps) => {
   
   const [selectedDS, setselectedDS] = useState<any>({})
 
+console.log(bleData);
 
   
   
@@ -39,12 +42,11 @@ const BarChart = (props: BarChartProps) => {
       if(isBleOrWifi){
         const lala = chosenLineChart(selectedDS,dataWifiAndKey,Ydata)
         console.log(lala);
-        
         setWifiData(lala)
-        
         setChoseOne(false)
       }else{
         const lala = chosenLineChart(selectedDS,dataBLEAndKey,Ydata)
+
         setBleData(lala)
         setChoseOne(false)
       }
@@ -126,6 +128,7 @@ const BarChart = (props: BarChartProps) => {
         </button>
 
         <ChangeChartData
+        setDataAmount={setDataAmount}
           setYdata={setYdata}
           setDataSet={setDataSet}
           isBleOrWifi={isBleOrWifi}
@@ -137,8 +140,9 @@ const BarChart = (props: BarChartProps) => {
           setWifiData={setWifiData}
           setBleData={setBleData}
           setselectedDS={setselectedDS}
+          
         />
-
+        
         <button onClick={(CSVdata) => handleDownload(CSVdata)}>
           Download To CSV
         </button>

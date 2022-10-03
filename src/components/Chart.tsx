@@ -40,6 +40,9 @@ function ChartDiv(props: ChartProps) {
   const [min, setMin] = useState<number>(0);
   const [max, setMax] = useState<number>(0);
 
+  console.log(bleData);
+  
+
   useEffect(() => {
     if (isBleOrWifi) {
       selectMinMax(wifiData);

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { findTimeFrame } from "../features/timeRange";
 import { filterDataToSelect, filterDataSet } from "../features/filter";
 import {chosenLineChart} from "../features/chartData"
+import DataSplit from './Datasplit'
 
 interface ChangeChartDataProps {
   setYdata: Function;
@@ -15,6 +16,7 @@ interface ChangeChartDataProps {
   setWifiData:Function;
   setBleData:Function;
   setselectedDS:Function;
+  setDataAmount:Function;
 }
 
 function ChangeChartData(props: ChangeChartDataProps) {
@@ -29,8 +31,9 @@ function ChangeChartData(props: ChangeChartDataProps) {
     dataWifiAndKey,
     setLabels,
     setChoseOne,
-   
-    setselectedDS
+
+    setselectedDS,
+    setDataAmount
   } = props;
 
 
@@ -38,11 +41,6 @@ function ChangeChartData(props: ChangeChartDataProps) {
   const [Ydata,setDSdata] = useState("");
   const [chosenDS , setChosetDateSet] = useState<any>([]);
  
-
-
-  console.log(chosenDS);
-  
-
   const bleOptions = filterDataToSelect(dataBLEAndKey);
   const wifiOptions = filterDataToSelect(dataWifiAndKey);
 
@@ -83,8 +81,8 @@ function ChangeChartData(props: ChangeChartDataProps) {
     const selectedIndex = ev.target.value;
     
     const selectedDS = chosenDS[selectedIndex]
+    
     setselectedDS(selectedDS)
-    console.log(selectedDS);
     setChoseOne(true)
   }
 
@@ -192,6 +190,7 @@ function ChangeChartData(props: ChangeChartDataProps) {
           })}
         </select>
       </label>
+      <DataSplit  setDataAmount={setDataAmount}/>
     </>
   );
 }

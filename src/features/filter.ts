@@ -188,3 +188,5 @@ export const filterDataToSelect = (list: Array<any>) => {
 
   return { newNumbers, newLetters, numbersAndLetters };
 };
+
+

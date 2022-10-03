@@ -1,4 +1,5 @@
 export function findTimeFrame(someData: any) {
+  
   let timeList: any = [];
   
   someData.forEach((data: any) => {
