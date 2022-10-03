@@ -24,23 +24,19 @@ function App() {
 
 
 useEffect(() => {
-  if(dataAmount === 0){
-    return
-  }else {insideUseEff()}
-},[])
-
-function insideUseEff(){
-  
-  console.log(dataAmount);
+  if(dataAmount !== 0){
+    console.log(dataAmount);
     
-  const newData = allData.slice(0,dataAmount);
-  console.log(newData);
+    const newData = allData.slice(0,dataAmount);
+    console.log(newData);
+    
+  const { tempWifi, tempBLE } = handleFilterHeaders(event_mapping);
+  const amountChanged = true
+  setchartdata(newData,tempWifi, tempBLE,amountChanged)
+  }
   
-const { tempWifi, tempBLE } = handleFilterHeaders(event_mapping);
-const amountChanged = true
-setchartdata(newData,tempWifi, tempBLE,amountChanged)
   
-}
+},[])
 
   function handleFilterHeaders(event_mapping: any) {
     const tempWifi: any = [];

@@ -31,7 +31,6 @@ function ChangeChartData(props: ChangeChartDataProps) {
     dataWifiAndKey,
     setLabels,
     setChoseOne,
-
     setselectedDS,
     setDataAmount
   } = props;

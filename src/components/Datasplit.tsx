@@ -12,7 +12,7 @@ function Datasplit(props:DatasplitProps) {
         ev.preventDefault()
         const amount = ev.target.elements.setAmount.value;
         setDataAmount(amount)
-        console.log(amount);
+        console.log(amount)
     }
   return (
     <>
