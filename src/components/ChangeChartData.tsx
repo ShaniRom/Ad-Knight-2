@@ -14,8 +14,6 @@ interface ChangeChartDataProps {
   setChoseOne:Function;
   setWifiData:Function;
   setBleData:Function;
-  setChosetDateSet:Function;
-  chosenDS:Array<any>;
   setselectedDS:Function;
 }
 
@@ -31,14 +29,14 @@ function ChangeChartData(props: ChangeChartDataProps) {
     dataWifiAndKey,
     setLabels,
     setChoseOne,
-    setChosetDateSet,
-    chosenDS,
+   
     setselectedDS
   } = props;
 
 
   const [chosenTime, setChosenTime] = useState<Array<object>>([]);
-  const [Ydata,setDSdata] = useState("")
+  const [Ydata,setDSdata] = useState("");
+  const [chosenDS , setChosetDateSet] = useState<any>([]);
  
 
 
@@ -60,7 +58,7 @@ function ChangeChartData(props: ChangeChartDataProps) {
       setChosetDateSet(selectedDS);
       setChosenTime(timestamp);
     }
-  }, []);
+  }, [chosenDS]);
 
   function changeDatasets(ev: any) {
 

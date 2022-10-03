@@ -28,10 +28,10 @@ const BarChart = (props: BarChartProps) => {
   const [Ydata, setYdata] = useState("rssi_0")
   const [dataSet, setDataSet] = useState("MAC_1")
   const chartRef: any = useRef(null)
-  const [chosenDS , setChosetDateSet] = useState<any>([]);
+  
   const [selectedDS, setselectedDS] = useState<any>({})
 
-  console.log(chosenDS);
+
   
   
   useEffect(() => {
@@ -57,7 +57,7 @@ const BarChart = (props: BarChartProps) => {
     
     
     
-  }, [Ydata, dataSet, isBleOrWifi, labels,selectedDS,chosenDS])
+  }, [Ydata, dataSet, isBleOrWifi, labels,selectedDS])
 
 
   async function getChartData(index: any) {
@@ -136,8 +136,6 @@ const BarChart = (props: BarChartProps) => {
           setChoseOne={setChoseOne}
           setWifiData={setWifiData}
           setBleData={setBleData}
-          setChosetDateSet={setChosetDateSet}
-          chosenDS={chosenDS}
           setselectedDS={setselectedDS}
         />
 
