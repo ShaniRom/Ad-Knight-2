@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { findTimeFrame } from "../features/timeRange";
-import { filterDataToSelect, filterDataSet } from "../features/filter";
-import {chosenLineChart} from "../features/chartData"
+
+ import { filterDataToSelect, filterDataSet } from "../features/filter";
+import { chosenLineChart } from "../features/chartData";
 
 interface ChangeChartDataProps {
   setYdata: Function;
@@ -11,10 +12,10 @@ interface ChangeChartDataProps {
   dataWifiAndKey: Array<any>;
   dataSet: string;
   setLabels: Function;
-  setChoseOne:Function;
-  setWifiData:Function;
-  setBleData:Function;
-  setselectedDS:Function;
+  setChoseOne: Function;
+  setWifiData: Function;
+  setBleData: Function;
+  setselectedDS: Function;
 }
 
 function ChangeChartData(props: ChangeChartDataProps) {
@@ -29,44 +30,50 @@ function ChangeChartData(props: ChangeChartDataProps) {
     dataWifiAndKey,
     setLabels,
     setChoseOne,
-   
-    setselectedDS
+
+    setselectedDS,
   } = props;
 
-
   const [chosenTime, setChosenTime] = useState<Array<object>>([]);
-  const [Ydata,setDSdata] = useState("");
-  const [chosenDS , setChosetDateSet] = useState<any>([]);
- 
-
-
-  console.log(chosenDS);
-  
-
+  const [Ydata, setDSdata] = useState("");
+  const [chosenDS, setChosenDateSet] = useState<any>([]);
   const bleOptions = filterDataToSelect(dataBLEAndKey);
   const wifiOptions = filterDataToSelect(dataWifiAndKey);
 
   useEffect(() => {
+    
+   
+   
+
+  }, [chosenDS, chosenTime, changeDatasets, filterByChosenTS,filterDataSet]);
+
+  function selectByDataSet() {
+    console.log(isBleOrWifi + "issBleOrWifi");
     if (isBleOrWifi) {
       const timestamp = findTimeFrame(dataWifiAndKey);
       const selectedDS = filterDataSet(dataWifiAndKey, dataSet);
-      setChosetDateSet(selectedDS);
-      setChosenTime(timestamp);
+      setChosenDateSet(selectedDS);
+       setChosenTime(timestamp);
     } else {
       const timestamp = findTimeFrame(dataBLEAndKey);
-      const selectedDS = filterDataSet(dataBLEAndKey, dataSet);
-      setChosetDateSet(selectedDS);
+      const selectedDS = filterDataSet(dataBLEAndKey, dataSet);      
+      setChosenDateSet(selectedDS);
       setChosenTime(timestamp);
+      console.log(chosenDS)
+     //---chosendata takes a two clicks to show and when setchosendataset and chosentime it rerenders each time
+     //maybe make it async 
+    // maybe try to change the stuff needed in filterdataset to two different functions instead of it having to get datawifiandkeys and dataset 
     }
-  }, [chosenDS]);
+  }
+ 
 
   function changeDatasets(ev: any) {
-
     ev.preventDefault();
+    selectByDataSet();
     const newDataSetData = ev.target.elements.changeChartData.value;
     const newDataSet = ev.target.elements.changeChartDataset.value;
     setYdata(newDataSetData);
-    setDSdata(newDataSetData)
+    setDSdata(newDataSetData);
     setDataSet(newDataSet);
   }
 
@@ -79,13 +86,11 @@ function ChangeChartData(props: ChangeChartDataProps) {
   }
 
   function getChosenLINE(ev: any) {
-
     const selectedIndex = ev.target.value;
-    
-    const selectedDS = chosenDS[selectedIndex]
-    setselectedDS(selectedDS)
+    const selectedDS = chosenDS[selectedIndex];
+    setselectedDS(selectedDS);
     console.log(selectedDS);
-    setChoseOne(true)
+    setChoseOne(true);
   }
 
   return (
@@ -140,6 +145,7 @@ function ChangeChartData(props: ChangeChartDataProps) {
                 })}
           </select>
         </label>
+        
         <button type="submit">submit</button>
       </form>
 
@@ -184,6 +190,7 @@ function ChangeChartData(props: ChangeChartDataProps) {
           onChange={getChosenLINE}
         >
           {chosenDS.map((ds: any, i: number) => {
+            
             return (
               <option key={i} value={i}>
                 {ds.chosendataSet}

@@ -23,18 +23,18 @@ function App() {
     const tempBLE: any = [];
     const wifi = event_mapping["WIFI"]["0.8.5"];
     const ble = event_mapping.BLE["0.8.5"];
-    const sortedWIFI = Object.entries(wifi).sort(
-      (a: any, b: any) => a[1] - b[1]
+    const sortingByIndexWIFI = Object.entries(wifi).sort(
+      (currentEl: any, nextEl: any) => currentEl[1] - nextEl[1]
     );
-    const sortedBLE = Object.entries(ble).sort((a: any, b: any) => a[1] - b[1]);
-
-    sortedWIFI.forEach((obj) => {
+    const sortedByIndexBLE = Object.entries(ble).sort((currentEl: any, nextEl: any) => currentEl[1] -nextEl[1]);
+   
+    sortingByIndexWIFI.forEach((obj) => {
       tempWifi.push(obj[0]);
     });
-    sortedBLE.forEach((obj) => {
+    sortedByIndexBLE .forEach((obj) => {
       tempBLE.push(obj[0]);
     });
-
+  
     return { tempWifi, tempBLE };
   }
 

@@ -37,15 +37,16 @@ const BarChart = (props: BarChartProps) => {
   useEffect(() => {
     if(choseOne){
       if(isBleOrWifi){
-        const lala = chosenLineChart(selectedDS,dataWifiAndKey,Ydata)
-        console.log(lala);
+        const oneChosenDataset = chosenLineChart(selectedDS,dataWifiAndKey,Ydata)
+
+        console.log(oneChosenDataset);
         
-        setWifiData(lala)
+        setWifiData(oneChosenDataset)
         
         setChoseOne(false)
       }else{
-        const lala = chosenLineChart(selectedDS,dataBLEAndKey,Ydata)
-        setBleData(lala)
+        const oneChosenDataset = chosenLineChart(selectedDS,dataBLEAndKey,Ydata)
+        setBleData(oneChosenDataset)
         setChoseOne(false)
       }
     }else{
@@ -57,7 +58,7 @@ const BarChart = (props: BarChartProps) => {
     
     
     
-  }, [Ydata, dataSet, isBleOrWifi, labels,selectedDS])
+  }, [Ydata, dataSet, isBleOrWifi,labels,selectedDS])
 
 
   async function getChartData(index: any) {
