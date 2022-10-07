@@ -38,7 +38,7 @@ function ChangeChartData(props: ChangeChartDataProps) {
 
   const [chosenTime, setChosenTime] = useState<Array<object>>([]);
   const [Ydata,setDSdata] = useState("");
-  const [chosenDS , setChosetDateSet] = useState<any>([]);
+  const [chosenDS , setChosenDateSet] = useState<any>([]);
  
   const bleOptions = filterDataToSelect(dataBLEAndKey);
   const wifiOptions = filterDataToSelect(dataWifiAndKey);
@@ -46,14 +46,20 @@ function ChangeChartData(props: ChangeChartDataProps) {
   useEffect(() => {
     if (isBleOrWifi) {
       const timestamp = findTimeFrame(dataWifiAndKey);
-      const selectedDS = filterDataSet(dataWifiAndKey, dataSet);
-      setChosetDateSet(selectedDS);
       setChosenTime(timestamp);
+      //---causing the error------------
+       const selectedDS = filterDataSet(dataWifiAndKey, dataSet);
+       setChosenDateSet(selectedDS);
+      
+     
     } else {
       const timestamp = findTimeFrame(dataBLEAndKey);
+      setChosenTime(timestamp); 
+
       const selectedDS = filterDataSet(dataBLEAndKey, dataSet);
-      setChosetDateSet(selectedDS);
-      setChosenTime(timestamp);
+      setChosenDateSet(selectedDS);
+     
+      
     }
   }, [chosenDS]);
 

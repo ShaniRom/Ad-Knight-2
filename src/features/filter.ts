@@ -92,8 +92,9 @@ export const filterDataSet = (list: Array<any>, dataset: string) => {
       objArray: list.filter((obj: any) => obj[`${dataset}`] === line),
     };
     alldatasetObj = [...alldatasetObj, tempObj];
+    // console.log(tempObj.chosendataSet)
   });
-
+  
   return alldatasetObj;
 };
 

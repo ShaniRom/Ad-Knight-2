@@ -40,14 +40,15 @@ console.log(bleData);
   useEffect(() => {
     if(choseOne){
       if(isBleOrWifi){
-        const lala = chosenLineChart(selectedDS,dataWifiAndKey,Ydata)
-        console.log(lala);
-        setWifiData(lala)
+        const chosenDatasetLine = chosenLineChart(selectedDS,dataWifiAndKey,Ydata)
+
+        console.log(chosenDatasetLine);
+      
+        setWifiData(chosenDatasetLine)
         setChoseOne(false)
       }else{
-        const lala = chosenLineChart(selectedDS,dataBLEAndKey,Ydata)
-
-        setBleData(lala)
+        const chosenDatasetLine = chosenLineChart(selectedDS,dataBLEAndKey,Ydata)
+        setBleData(chosenDatasetLine)
         setChoseOne(false)
       }
     }else{
