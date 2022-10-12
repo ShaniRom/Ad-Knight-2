@@ -48,16 +48,17 @@ function ChangeChartData(props: ChangeChartDataProps) {
       const timestamp = findTimeFrame(dataWifiAndKey);
       setChosenTime(timestamp);
       //---causing the error------------
-       const selectedDS = filterDataSet(dataWifiAndKey, dataSet);
-       setChosenDateSet(selectedDS);
+      //  const selectedDS = filterDataSet(dataWifiAndKey, dataSet);
+      //  setChosenDateSet(selectedDS);
       
      
     } else {
       const timestamp = findTimeFrame(dataBLEAndKey);
       setChosenTime(timestamp); 
 
-      const selectedDS = filterDataSet(dataBLEAndKey, dataSet);
-      setChosenDateSet(selectedDS);
+      // const selectedDS = filterDataSet(dataBLEAndKey, dataSet);
+      
+      // setChosenDateSet(selectedDS);
      
       
     }

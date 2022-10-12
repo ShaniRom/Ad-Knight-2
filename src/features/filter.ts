@@ -74,17 +74,17 @@ function filterWithKeys(
 // -------------------------------------------------------
 
 export const filterDataSet = (list: Array<any>, dataset: string) => {
-
+  
   let datasetList: any = [];
 
   list.forEach((data: any) => {
     datasetList.push(data[`${dataset}`]);
   });
-
+    
   const datasetListArray = datasetList.filter(
     (n: any, i: any) => datasetList.indexOf(n) === i
   );
-  
+  console.log("datasetListArray" +datasetListArray)
   let alldatasetObj: any = [];
   datasetListArray.map((line: any) => {
     const tempObj = {
@@ -94,7 +94,7 @@ export const filterDataSet = (list: Array<any>, dataset: string) => {
     alldatasetObj = [...alldatasetObj, tempObj];
     // console.log(tempObj.chosendataSet)
   });
-  
+  console.log("alldatasetObj"+alldatasetObj)
   return alldatasetObj;
 };
 

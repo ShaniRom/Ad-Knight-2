@@ -28,7 +28,7 @@ const createChartData =  (someData : any,dataSetData:string,dataSet:string,label
   }
   
   
-  return data;
+  return {data,dataSetList};
 
 }
 
