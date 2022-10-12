@@ -80,3 +80,21 @@ body{
     width: 50%;
 }
 }
+.buttons{
+    margin-top: 1vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+   width:99%;
+   height: 20vh;
+   &_next{
+    width: 10vw;
+    margin-right: 1vw;
+   }
+   &_previous{
+    width: 10vw;
+
+    margin-left: 1vw;
+
+   }
+}

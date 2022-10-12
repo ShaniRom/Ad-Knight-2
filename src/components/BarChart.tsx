@@ -7,18 +7,21 @@ import "../style/style.scss";
 import Table from "./Table";
 import ChangeChartData from "./ChangeChartData";
 import ChartDiv from "./Chart";
+import NextPrevious from "./NextPrevious";
 
 interface BarChartProps {
   theChartData: any;
   dataWifiAndKey: Array<string>;
   dataBLEAndKey: Array<string>; 
   setDataAmount:Function;
+  count:number;
+  setCount:Function; 
   
 }
 
 const BarChart = (props: BarChartProps) => {
 
-  const { theChartData, dataWifiAndKey, dataBLEAndKey,setDataAmount } = props;
+  const { theChartData, dataWifiAndKey, dataBLEAndKey,setDataAmount,count,setCount } = props;
 
   
   let [chartClicked, setChartClicked] = useState(false)
@@ -29,20 +32,16 @@ const BarChart = (props: BarChartProps) => {
   const [choseOne,setChoseOne] = useState(false)
   const [Ydata, setYdata] = useState("rssi_0")
   const [dataSet, setDataSet] = useState("MAC_1")
+  const [chosenDS , setChosenDateSet] = useState<any>([]);
   const chartRef: any = useRef(null)
   
   const [selectedDS, setselectedDS] = useState<any>({})
 
-console.log(bleData);
-
-  
-  
   useEffect(() => {
     if(choseOne){
       if(isBleOrWifi){
         const chosenDatasetLine = chosenLineChart(selectedDS,dataWifiAndKey,Ydata)
 
-        console.log(chosenDatasetLine);
       
         setWifiData(chosenDatasetLine)
         setChoseOne(false)
@@ -52,8 +51,12 @@ console.log(bleData);
         setChoseOne(false)
       }
     }else{
-      const wifiData = createChartData(dataWifiAndKey, Ydata, dataSet, labels);
-      const bleData = createChartData(dataBLEAndKey, Ydata, dataSet, labels);
+      const wifi = createChartData(dataWifiAndKey, Ydata, dataSet, labels);
+      const ble = createChartData(dataBLEAndKey, Ydata, dataSet, labels);
+      const wifiData = wifi.data
+      const bleData = ble.data 
+      const selectedDS = ble.dataSetList;
+      setChosenDateSet(selectedDS)
       setWifiData(wifiData);
       setBleData(bleData);
     }
@@ -118,6 +121,8 @@ console.log(bleData);
         bleData={bleData}
         wifiData={wifiData}
         isBleOrWifi={isBleOrWifi}
+        count={count}
+        setCount={setCount}
       />
       <div className="main_filterChart">
         <button
@@ -140,6 +145,7 @@ console.log(bleData);
           setChoseOne={setChoseOne}
           setWifiData={setWifiData}
           setBleData={setBleData}
+          chosenDS={chosenDS}
           setselectedDS={setselectedDS}
           
         />
@@ -149,6 +155,7 @@ console.log(bleData);
         </button>
         <button onClick={handleDownloadToImg}>Download To Image</button>
       </div>
+      
     </div>
   );
 };

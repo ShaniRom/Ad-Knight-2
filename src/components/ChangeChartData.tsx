@@ -3,6 +3,7 @@ import { findTimeFrame } from "../features/timeRange";
 import { filterDataToSelect, filterDataSet } from "../features/filter";
 import {chosenLineChart} from "../features/chartData"
 import DataSplit from './Datasplit'
+import NextPrevious from "./NextPrevious";
 
 interface ChangeChartDataProps {
   setYdata: Function;
@@ -15,8 +16,9 @@ interface ChangeChartDataProps {
   setChoseOne:Function;
   setWifiData:Function;
   setBleData:Function;
-  setselectedDS:Function;
+  chosenDS:Array<any>;
   setDataAmount:Function;
+  setselectedDS:any
 }
 
 function ChangeChartData(props: ChangeChartDataProps) {
@@ -31,15 +33,15 @@ function ChangeChartData(props: ChangeChartDataProps) {
     dataWifiAndKey,
     setLabels,
     setChoseOne,
-    setselectedDS,
-    setDataAmount
+    chosenDS,
+    setDataAmount,
+    setselectedDS
   } = props;
 
 
   const [chosenTime, setChosenTime] = useState<Array<object>>([]);
   const [Ydata,setDSdata] = useState("");
-  const [chosenDS , setChosenDateSet] = useState<any>([]);
- 
+  
   const bleOptions = filterDataToSelect(dataBLEAndKey);
   const wifiOptions = filterDataToSelect(dataWifiAndKey);
 
@@ -50,8 +52,7 @@ function ChangeChartData(props: ChangeChartDataProps) {
       //---causing the error------------
       //  const selectedDS = filterDataSet(dataWifiAndKey, dataSet);
       //  setChosenDateSet(selectedDS);
-      
-     
+
     } else {
       const timestamp = findTimeFrame(dataBLEAndKey);
       setChosenTime(timestamp); 
@@ -62,7 +63,7 @@ function ChangeChartData(props: ChangeChartDataProps) {
      
       
     }
-  }, [chosenDS]);
+  }, []);
 
   function changeDatasets(ev: any) {
 
@@ -197,6 +198,8 @@ function ChangeChartData(props: ChangeChartDataProps) {
         </select>
       </label>
       <DataSplit  setDataAmount={setDataAmount}/>
+      
+
     </>
   );
 }

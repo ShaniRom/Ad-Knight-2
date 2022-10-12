@@ -1,13 +1,5 @@
 import { useRef, useEffect, useState } from "react";
-// import { Line , getElementAtEvent, Doughnut } from "react-chartjs-2";
-// import { Chart as ChartJS } from 'chart.js';
-// import {Chart,registerables} from 'chart.js'
-// Chart.register(...registerables)
 
-// import zoomPlugin from 'chartjs-plugin-zoom';
-// ChartJS.register(zoomPlugin)
-
-///////v4 -in order to improve performance and maintainability
 import { Chart } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -18,6 +10,7 @@ import {
   Title,
   registerables,
 } from "chart.js";
+import NextPrevious from "./NextPrevious";
 
 ChartJS.register(
   LineController,
@@ -33,10 +26,12 @@ interface ChartProps {
   wifiData: any;
   bleData: any;
   chartRef: any;
+  count:number
+  setCount:Function
 }
 
 function ChartDiv(props: ChartProps) {
-  const { isBleOrWifi, bleData, wifiData, chartRef } = props;
+  const { isBleOrWifi, bleData, wifiData, chartRef ,count,setCount} = props;
   const [min, setMin] = useState<number>(0);
   const [max, setMax] = useState<number>(0);
 
@@ -108,6 +103,7 @@ function ChartDiv(props: ChartProps) {
           },
         }}
       />
+      <NextPrevious count={count} setCount={setCount}/>
     </div>
   );
 }

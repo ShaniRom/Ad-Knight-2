@@ -84,7 +84,6 @@ export const filterDataSet = (list: Array<any>, dataset: string) => {
   const datasetListArray = datasetList.filter(
     (n: any, i: any) => datasetList.indexOf(n) === i
   );
-  console.log("datasetListArray" +datasetListArray)
   let alldatasetObj: any = [];
   datasetListArray.map((line: any) => {
     const tempObj = {
@@ -92,9 +91,7 @@ export const filterDataSet = (list: Array<any>, dataset: string) => {
       objArray: list.filter((obj: any) => obj[`${dataset}`] === line),
     };
     alldatasetObj = [...alldatasetObj, tempObj];
-    // console.log(tempObj.chosendataSet)
   });
-  console.log("alldatasetObj"+alldatasetObj)
   return alldatasetObj;
 };
 

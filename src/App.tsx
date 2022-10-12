@@ -19,19 +19,26 @@ function App() {
   let [theChartData, setTheChartData] = useState<any>();
   let [dataWifiAndKey, setdataWifiAndKey] = useState<any>([]);
   let [dataBLEAndKey, setdataBLEAndKey] = useState<any>([]);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    if (dataAmount !== 0) {
-      console.log(dataAmount);
 
+    if (dataAmount !== 0 && count === 0) {
       const newData = allData.slice(0, dataAmount);
       console.log(newData);
-
+      const { tempWifi, tempBLE } = handleFilterHeaders(event_mapping);
+      const amountChanged = true;
+      setchartdata(newData, tempWifi, tempBLE, amountChanged);
+    } else if (dataAmount !== 0 && count !== 0) {
+      const newData = allData.slice(dataAmount * count,dataAmount * (count + 1));
+      console.log(dataAmount * count);
+      console.log(allData[dataAmount * count]);
+      console.log(newData[0]);
       const { tempWifi, tempBLE } = handleFilterHeaders(event_mapping);
       const amountChanged = true;
       setchartdata(newData, tempWifi, tempBLE, amountChanged);
     }
-  }, []);
+  }, [dataAmount, count]);
 
   function handleFilterHeaders(event_mapping: any) {
     const tempWifi: any = [];
@@ -59,6 +66,8 @@ function App() {
     let newFile = ev.target.files[0];
 
     const data = await papaparse(newFile);
+    console.log(data);
+
     setAllData(data);
 
     const newData: Array<ObjectModel> = data.slice(0, 4999);
@@ -77,8 +86,6 @@ function App() {
 
     const wifiList = result.wifiData;
     const bleList = result.BLEData;
-
-    console.log(amountChanged);
 
     if (amountChanged) {
       setFileAdded(true);
@@ -117,6 +124,8 @@ function App() {
           theChartData={theChartData}
           dataWifiAndKey={dataWifiAndKey}
           dataBLEAndKey={dataBLEAndKey}
+          count={count}
+          setCount={setCount}
         />
       ) : null}
       {fileAdded ? null : (
