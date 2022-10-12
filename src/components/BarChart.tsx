@@ -34,7 +34,7 @@ const BarChart = (props: BarChartProps) => {
   const [dataSet, setDataSet] = useState("MAC_1")
   const [chosenDS , setChosenDateSet] = useState<any>([]);
   const chartRef: any = useRef(null)
-  
+
   const [selectedDS, setselectedDS] = useState<any>({})
 
   useEffect(() => {
@@ -63,7 +63,7 @@ const BarChart = (props: BarChartProps) => {
     
     
     
-  }, [Ydata, dataSet, isBleOrWifi, labels,selectedDS])
+  }, [Ydata, dataSet, isBleOrWifi, labels,selectedDS,count])
 
 
   async function getChartData(index: any) {

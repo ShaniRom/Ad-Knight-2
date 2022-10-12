@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { findTimeFrame } from "../features/timeRange";
 import { filterDataToSelect, filterDataSet } from "../features/filter";
-import {chosenLineChart} from "../features/chartData"
-import DataSplit from './Datasplit'
+import { chosenLineChart } from "../features/chartData";
+import DataSplit from "./Datasplit";
 import NextPrevious from "./NextPrevious";
 
 interface ChangeChartDataProps {
@@ -13,12 +13,12 @@ interface ChangeChartDataProps {
   dataWifiAndKey: Array<any>;
   dataSet: string;
   setLabels: Function;
-  setChoseOne:Function;
-  setWifiData:Function;
-  setBleData:Function;
-  chosenDS:Array<any>;
-  setDataAmount:Function;
-  setselectedDS:any
+  setChoseOne: Function;
+  setWifiData: Function;
+  setBleData: Function;
+  chosenDS: Array<any>;
+  setDataAmount: Function;
+  setselectedDS: any;
 }
 
 function ChangeChartData(props: ChangeChartDataProps) {
@@ -35,13 +35,12 @@ function ChangeChartData(props: ChangeChartDataProps) {
     setChoseOne,
     chosenDS,
     setDataAmount,
-    setselectedDS
+    setselectedDS,
   } = props;
 
-
   const [chosenTime, setChosenTime] = useState<Array<object>>([]);
-  const [Ydata,setDSdata] = useState("");
-  
+  const [Ydata, setDSdata] = useState("");
+
   const bleOptions = filterDataToSelect(dataBLEAndKey);
   const wifiOptions = filterDataToSelect(dataWifiAndKey);
 
@@ -49,29 +48,18 @@ function ChangeChartData(props: ChangeChartDataProps) {
     if (isBleOrWifi) {
       const timestamp = findTimeFrame(dataWifiAndKey);
       setChosenTime(timestamp);
-      //---causing the error------------
-      //  const selectedDS = filterDataSet(dataWifiAndKey, dataSet);
-      //  setChosenDateSet(selectedDS);
-
     } else {
       const timestamp = findTimeFrame(dataBLEAndKey);
-      setChosenTime(timestamp); 
-
-      // const selectedDS = filterDataSet(dataBLEAndKey, dataSet);
-      
-      // setChosenDateSet(selectedDS);
-     
-      
+      setChosenTime(timestamp);
     }
   }, []);
 
   function changeDatasets(ev: any) {
-
     ev.preventDefault();
     const newDataSetData = ev.target.elements.changeChartData.value;
     const newDataSet = ev.target.elements.changeChartDataset.value;
     setYdata(newDataSetData);
-    setDSdata(newDataSetData)
+    setDSdata(newDataSetData);
     setDataSet(newDataSet);
   }
 
@@ -84,13 +72,12 @@ function ChangeChartData(props: ChangeChartDataProps) {
   }
 
   function getChosenLINE(ev: any) {
-
     const selectedIndex = ev.target.value;
-    
-    const selectedDS = chosenDS[selectedIndex]
-    
-    setselectedDS(selectedDS)
-    setChoseOne(true)
+
+    const selectedDS = chosenDS[selectedIndex];
+
+    setselectedDS(selectedDS);
+    setChoseOne(true);
   }
 
   return (
@@ -197,9 +184,7 @@ function ChangeChartData(props: ChangeChartDataProps) {
           })}
         </select>
       </label>
-      <DataSplit  setDataAmount={setDataAmount}/>
-      
-
+      <DataSplit setDataAmount={setDataAmount} />
     </>
   );
 }
