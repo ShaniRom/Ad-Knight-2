@@ -2,12 +2,12 @@ import { useState, useEffect, useRef } from "react";
 import Papa from "papaparse";
 // import CSVDownloader from "./CSVDownloader";
 import createChartData,{chosenLineChart} from "../features/chartData";
-// import { Line, getElementAtEvent, Doughnut } from "react-chartjs-2";
 import "../style/style.scss";
 import Table from "./Table";
 import ChangeChartData from "./ChangeChartData";
 import ChartDiv from "./Chart";
-import NextPrevious from "./NextPrevious";
+
+
 
 interface BarChartProps {
   theChartData: any;
@@ -76,10 +76,24 @@ const BarChart = (props: BarChartProps) => {
     // setChartData(chartData);
   }
 
-  function handleDownload(CSVdata: any) {
+  function handleDownloadToCSV(CSVdata: any) {
     const dataTemp = wifiData.labels.map((year: any, i: number) => {
       return { mam: wifiData.datasets[0].data[i], Year: year };
     });
+  // console.log(dataBLEAndKey)
+  
+ // console.log(theChartData)
+    //  const dataTemp =  Object.keys(dataBLEAndKey).map((header:any, i: number) => {
+    //   console.log(header+"header")
+    //   return {header};
+    // });
+    // const templist = dataBLEAndKey.map((obj: any, i: number) => {
+      
+    //     Object.keys(obj).map((header:any, i: number) => {
+    //         console.log(header+"header")
+    //         return {header}
+    //   };
+    // });
 
     const templist = dataTemp.map((obj: any, i: number) => {
       return {
@@ -89,14 +103,10 @@ const BarChart = (props: BarChartProps) => {
     });
 
     let csv = Papa.unparse(templist);
-
     const blob = new Blob([csv]);
-
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-
     a.download = "CSVExportFile.csv";
-
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -150,7 +160,7 @@ const BarChart = (props: BarChartProps) => {
           
         />
         
-        <button onClick={(CSVdata) => handleDownload(CSVdata)}>
+        <button onClick={(CSVdata) => handleDownloadToCSV(CSVdata)}>
           Download To CSV
         </button>
         <button onClick={handleDownloadToImg}>Download To Image</button>

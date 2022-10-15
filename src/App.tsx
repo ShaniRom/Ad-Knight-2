@@ -40,7 +40,7 @@ function App() {
     }
   }, [dataAmount, count]);
 
-  function handleFilterHeaders(event_mapping: any) {
+ function handleFilterHeaders(event_mapping: any) {
     const tempWifi: any = [];
     const tempBLE: any = [];
     const wifi = event_mapping["WIFI"]["0.8.5"];
@@ -58,7 +58,7 @@ function App() {
     sortedByIndexBLE.forEach((obj) => {
       tempBLE.push(obj[0]);
     });
-
+    console.log(tempBLE+"temp ble")
     return { tempWifi, tempBLE };
   }
 
@@ -127,11 +127,11 @@ function App() {
           count={count}
           setCount={setCount}
         />
-      ) : null}
-      {fileAdded ? null : (
+      ) :  <input type="file" name="csvFile" accept=".csv" onChange={getCsvFile} />}
+      {/* {fileAdded ? null : (
         <input type="file" name="csvFile" accept=".csv" onChange={getCsvFile} />
-      )}
-      {/* <input type="file" name="csvFile" accept=".csv" onChange={getCsvFile} /> */}
+      )} */}
+     
     </div>
   );
 }

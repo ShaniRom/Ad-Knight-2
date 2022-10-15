@@ -3,7 +3,7 @@ import { findTimeFrame } from "../features/timeRange";
 import { filterDataToSelect, filterDataSet } from "../features/filter";
 import { chosenLineChart } from "../features/chartData";
 import DataSplit from "./Datasplit";
-import NextPrevious from "./NextPrevious";
+
 
 interface ChangeChartDataProps {
   setYdata: Function;

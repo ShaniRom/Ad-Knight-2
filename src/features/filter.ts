@@ -74,13 +74,12 @@ function filterWithKeys(
 // -------------------------------------------------------
 
 export const filterDataSet = (list: Array<any>, dataset: string) => {
-  
   let datasetList: any = [];
 
   list.forEach((data: any) => {
     datasetList.push(data[`${dataset}`]);
   });
-    
+
   const datasetListArray = datasetList.filter(
     (n: any, i: any) => datasetList.indexOf(n) === i
   );
@@ -96,7 +95,6 @@ export const filterDataSet = (list: Array<any>, dataset: string) => {
 };
 
 export const filterDataToSelect = (list: Array<any>) => {
-
   const numbersCheck = new RegExp(/^[(-9)-9.,]+$/);
   const lettersCheck = new RegExp(/^[a-zA-Z\s.,]+$/);
   const bothCheck = new RegExp(/^[A-Za-z0-9]*$/);
@@ -186,5 +184,3 @@ export const filterDataToSelect = (list: Array<any>) => {
 
   return { newNumbers, newLetters, numbersAndLetters };
 };
-
-
