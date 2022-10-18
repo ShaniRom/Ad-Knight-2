@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Chart } from "react-chartjs-2";
 import {
@@ -26,17 +26,16 @@ interface ChartProps {
   wifiData: any;
   bleData: any;
   chartRef: any;
-  count:number
-  setCount:Function
+  count: number;
+  setCount: Function;
 }
 
 function ChartDiv(props: ChartProps) {
-  const { isBleOrWifi, bleData, wifiData, chartRef ,count,setCount} = props;
+  const { isBleOrWifi, bleData, wifiData, chartRef, count, setCount } = props;
   const [min, setMin] = useState<number>(0);
   const [max, setMax] = useState<number>(0);
 
   console.log(bleData);
-  
 
   useEffect(() => {
     if (isBleOrWifi) {
@@ -99,11 +98,10 @@ function ChartDiv(props: ChartProps) {
                 borderColor: "blue",
               },
             },
-            // grid line settings
           },
         }}
       />
-      <NextPrevious count={count} setCount={setCount}/>
+      <NextPrevious count={count} setCount={setCount} />
     </div>
   );
 }

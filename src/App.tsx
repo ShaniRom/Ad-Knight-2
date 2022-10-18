@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { findTimeFrame } from "./features/timeRange";
 import event_mapping from "./features/event_mapping.json";
 import { defaultChartData } from "./features/chartData";

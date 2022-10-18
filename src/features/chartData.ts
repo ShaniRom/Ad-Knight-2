@@ -2,9 +2,9 @@ import { filterDataSet } from "./filter";
 import { getColors } from "./colors";
 import {findTimeFrame} from './timeRange';
 import ObjectModel from "../models/ObjectModelBLE";
-import { Logger } from "sass";
 
-//dataset is the line
+
+
 const createChartData =  (someData : any,dataSetData:string,dataSet:string,labels:Array<number>) => {
 
   
@@ -72,9 +72,9 @@ export const chosenLineChart = (selectedDS:any,list:Array<any>,yData:string) => 
         datasets:[{ 
             label: dataSet,
             data:  dataArray.map((data: any) => Number(data[`${yData}`])),
-            border:"2px solid green",
-            backgroundColor: "green",
-            tension:0.4
+            borderColor: 'rgb(17, 247, 78)',
+            backgroundColor: 'rgb(17, 247, 78)',
+            tension: 0.4
           }]
         }
         return data;
@@ -87,23 +87,7 @@ export const chosenLineChart = (selectedDS:any,list:Array<any>,yData:string) => 
    
     
         
-  //   const data = {
-  //     labels: chosenTime.map((date:any) =>  ` ${date.hours}` + " " +
-  //     `:0${date.minutes}:0${date.seconds}`),
 
-  //     datasets: {
-  //       label: selectedDS.chosendataSet,
-  //         data:  selectedDS.objArray.map((data: any) =>  Number(data["rssi_0"])),
-  //         backgroundcolor: 'green',
-  //         tension:0.4
-  //     }
-  //   }
-  
-    
-      
-  //   return data;
-  
-  // }
 
 
 

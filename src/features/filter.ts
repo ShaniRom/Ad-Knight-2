@@ -108,7 +108,7 @@ export const filterDataToSelect = (list: Array<any>) => {
   let letters: Array<string> = [];
   let numbersAndLetters: Array<string> = [];
 
-  // dataList.length = 300;
+
 
   Object.keys(list[0]).map((elm: any) => {
     listKeys = [...listKeys, elm];
@@ -178,9 +178,7 @@ export const filterDataToSelect = (list: Array<any>) => {
   newNumbers = newNumbers.filter((key: string) => key !== "empty");
   newLetters = newLetters.filter((key: string) => key !== "empty");
 
-  // console.log("numbers", newNumbers);
-  // console.log("both", numbersAndLetters);
-  // console.log("letters", newLetters);
+
 
   return { newNumbers, newLetters, numbersAndLetters };
 };

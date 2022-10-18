@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { findTimeFrame } from "../features/timeRange";
 import { filterDataToSelect, filterDataSet } from "../features/filter";
 import { chosenLineChart } from "../features/chartData";
