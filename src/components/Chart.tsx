@@ -36,8 +36,8 @@ function ChartDiv(props: ChartProps) {
   const [min, setMin] = useState<number>(0);
   const [max, setMax] = useState<number>(0);
 
-  console.log(bleData );
-  //console.log(wifiData+ 'wifidata')
+ 
+  
 
   useEffect(() => {
     if (isBleOrWifi) {

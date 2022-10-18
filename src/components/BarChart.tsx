@@ -42,8 +42,6 @@ const BarChart = (props: BarChartProps) => {
     if(choseOne){
       if(isBleOrWifi){
         const chosenDatasetLine = chosenLineChart(selectedDS,dataWifiAndKey,Ydata)
-
-      
         setWifiData(chosenDatasetLine)
         setChoseOne(false)
       }else{
@@ -56,8 +54,20 @@ const BarChart = (props: BarChartProps) => {
       const ble = createChartData(dataBLEAndKey, Ydata, dataSet, labels);
       const wifiData = wifi.data
       const bleData = ble.data 
-      const selectedDS = ble.dataSetList;
-      setChosenDateSet(selectedDS)
+      
+       if(isBleOrWifi){
+        const selectedDS = wifi.dataSetList
+        console.log("wifi")
+        setChosenDateSet(selectedDS)
+      }else{
+        const selectedDS = ble.dataSetList
+        console.log("ble")
+        setChosenDateSet(selectedDS)
+      }
+      
+ 
+     
+     
       setWifiData(wifiData);
       setBleData(bleData);
     }
