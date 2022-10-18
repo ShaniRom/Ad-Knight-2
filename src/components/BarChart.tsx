@@ -13,6 +13,7 @@ interface BarChartProps {
   theChartData: any;
   dataWifiAndKey: Array<string>;
   dataBLEAndKey: Array<string>; 
+  dataAmount:number;
   setDataAmount:Function;
   count:number;
   setCount:Function; 
@@ -21,7 +22,7 @@ interface BarChartProps {
 
 const BarChart = (props: BarChartProps) => {
 
-  const { theChartData, dataWifiAndKey, dataBLEAndKey,setDataAmount,count,setCount } = props;
+  const { theChartData, dataWifiAndKey, dataBLEAndKey,dataAmount,setDataAmount,count,setCount } = props;
 
   
   let [chartClicked, setChartClicked] = useState(false)
@@ -133,6 +134,7 @@ const BarChart = (props: BarChartProps) => {
         isBleOrWifi={isBleOrWifi}
         count={count}
         setCount={setCount}
+        dataAmount={dataAmount}
       />
       <div className="main_filterChart">
         <button

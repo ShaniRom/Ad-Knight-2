@@ -28,14 +28,16 @@ interface ChartProps {
   chartRef: any;
   count: number;
   setCount: Function;
+  dataAmount:number
 }
 
 function ChartDiv(props: ChartProps) {
-  const { isBleOrWifi, bleData, wifiData, chartRef, count, setCount } = props;
+  const { isBleOrWifi, bleData, wifiData, chartRef, count, setCount,dataAmount } = props;
   const [min, setMin] = useState<number>(0);
   const [max, setMax] = useState<number>(0);
 
-  console.log(bleData);
+  console.log(bleData );
+  //console.log(wifiData+ 'wifidata')
 
   useEffect(() => {
     if (isBleOrWifi) {
@@ -101,7 +103,7 @@ function ChartDiv(props: ChartProps) {
           },
         }}
       />
-      <NextPrevious count={count} setCount={setCount} />
+      <NextPrevious count={count} setCount={setCount} dataAmount={dataAmount} />
     </div>
   );
 }

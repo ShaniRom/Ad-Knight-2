@@ -45,7 +45,7 @@ body{
     }
 
     &_chooseOneByOne{
-        // height: 15%;
+       
         width: 80%;
         justify-self: center;
         background-color: white;
@@ -86,14 +86,14 @@ body{
     flex-direction: row;
     justify-content: space-between;
    width:99%;
-   height: 20vh;
+   height: 10vh;
    &_next{
     width: 10vw;
     margin-right: 1vw;
+    
    }
    &_previous{
     width: 10vw;
-
     margin-left: 1vw;
 
    }

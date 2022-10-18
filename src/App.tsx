@@ -25,18 +25,15 @@ function App() {
 
     if (dataAmount !== 0 && count === 0) {
       const newData = allData.slice(0, dataAmount);
-      console.log(newData);
       const { tempWifi, tempBLE } = handleFilterHeaders(event_mapping);
       const amountChanged = true;
       setchartdata(newData, tempWifi, tempBLE, amountChanged);
     } else if (dataAmount !== 0 && count !== 0) {
       const newData = allData.slice(dataAmount * count,dataAmount * (count + 1));
-      console.log(dataAmount * count);
-      console.log(allData[dataAmount * count]);
-      console.log(newData[0]);
       const { tempWifi, tempBLE } = handleFilterHeaders(event_mapping);
       const amountChanged = true;
       setchartdata(newData, tempWifi, tempBLE, amountChanged);
+      
     }
   }, [dataAmount, count]);
 
@@ -58,7 +55,7 @@ function App() {
     sortedByIndexBLE.forEach((obj) => {
       tempBLE.push(obj[0]);
     });
-    console.log(tempBLE+"temp ble")
+   
     return { tempWifi, tempBLE };
   }
 
@@ -66,7 +63,7 @@ function App() {
     let newFile = ev.target.files[0];
 
     const data = await papaparse(newFile);
-    console.log(data);
+   
 
     setAllData(data);
 
@@ -120,6 +117,7 @@ function App() {
     <div className="App">
       {fileAdded ? (
         <BarChart
+        dataAmount={dataAmount}
           setDataAmount={setDataAmount}
           theChartData={theChartData}
           dataWifiAndKey={dataWifiAndKey}
@@ -128,15 +126,13 @@ function App() {
           setCount={setCount}
         />
       ) :  <input type="file" name="csvFile" accept=".csv" onChange={getCsvFile} />}
-      {/* {fileAdded ? null : (
-        <input type="file" name="csvFile" accept=".csv" onChange={getCsvFile} />
-      )} */}
+    
      
     </div>
   );
 }
 
-export default App;
+
 
 function papaparse(newFile: any): Promise<Array<any>> {
   return new Promise((resolve, reject) => {
@@ -149,3 +145,5 @@ function papaparse(newFile: any): Promise<Array<any>> {
     });
   });
 }
+
+export default App;
