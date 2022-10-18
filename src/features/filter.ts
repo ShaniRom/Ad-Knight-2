@@ -26,18 +26,7 @@ function filterWithKeys(
   let BLEData: any = [];
 
   // getting the keys and values together in BLE ----------------------------------------
-  // filteredBLE.forEach((ble:Array<string>,i:number)=>{
-  //   let tempObj: any = {};
-  //  keysBLE.forEach((key:string,i:number)=>{
-  //   tempObj[`${key[i]}`] = ble[i];
 
-  //  })
-
-  //   tempObj.ts = parseFloat(tempObj.ts);
-  //   const dateFound = getDate(tempObj.ts);
-  //   tempObj.date = dateFound;
-  //   BLEData = [...BLEData, tempObj];
-  // })
   for (let i = 0; i < filteredBLE.length; i++) {
     let tempObj: any = {};
     for (let x = 0; x < filteredBLE[i].length; x++) {
@@ -71,7 +60,7 @@ function filterWithKeys(
   return { wifiData, BLEData };
 }
 
-// -------------------------------------------------------
+
 
 export const filterDataSet = (list: Array<any>, dataset: string) => {
   let datasetList: any = [];
