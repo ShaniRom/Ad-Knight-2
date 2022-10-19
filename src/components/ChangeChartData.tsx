@@ -5,6 +5,8 @@ import { chosenLineChart } from "../features/chartData";
 import DataSplit from "./Datasplit";
 
 
+//------The Functions and forms to filter by the users choice ------
+
 interface ChangeChartDataProps {
   setYdata: Function;
   setDataSet: Function;
@@ -52,6 +54,7 @@ function ChangeChartData(props: ChangeChartDataProps) {
     }
   }, []);
 
+//------Filter by data/y-axios chosen ------
   function changeDatasets(ev: any) {
     ev.preventDefault();
     const newDataSetData = ev.target.elements.changeChartData.value;
@@ -60,7 +63,7 @@ function ChangeChartData(props: ChangeChartDataProps) {
     setDSdata(newDataSetData);
     setDataSet(newDataSet);
   }
-
+//------Filter by timestamp chosen ------
   function filterByChosenTS(ev: any) {
     ev.preventDefault();
     const minimumTS = parseInt(ev.target.elements.minTS.value);
@@ -69,6 +72,7 @@ function ChangeChartData(props: ChangeChartDataProps) {
     setLabels(chosenTS);
   }
 
+//------Filter the single dataset id the user chose to see alone ------
   function getChosenLINE(ev: any) {
     const selectedIndex = ev.target.value;
 

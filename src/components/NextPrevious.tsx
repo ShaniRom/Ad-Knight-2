@@ -7,7 +7,7 @@ interface NextPreviousProps {
 function NextPrevious(props: NextPreviousProps) {
   const { count, setCount, dataAmount } = props;
 
-  function scrollNextPrevious(ev: any) {
+  function scrollNextPreviousByAmount(ev: any) {
     const clicked = ev.target.name;
    
   
@@ -29,7 +29,7 @@ function NextPrevious(props: NextPreviousProps) {
         className="buttons_previous"
         name="previous"
         type="button"
-        onClick={scrollNextPrevious}
+        onClick={scrollNextPreviousByAmount}
       >
         Previous
       </button>
@@ -38,9 +38,9 @@ function NextPrevious(props: NextPreviousProps) {
         className="buttons_next"
         name="next"
         type="button"
-        onClick={scrollNextPrevious}
+        onClick={scrollNextPreviousByAmount}
       >
-        Next{" "}
+        Next
       </button>
     </div>
   );

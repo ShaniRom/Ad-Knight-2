@@ -25,7 +25,7 @@ function filterWithKeys(
   let wifiData: any = [];
   let BLEData: any = [];
 
-  // getting the keys and values together in BLE ----------------------------------------
+  // -----matching the keys and values together in BLE ----------------------------------------
 
   for (let i = 0; i < filteredBLE.length; i++) {
     let tempObj: any = {};
@@ -41,7 +41,7 @@ function filterWithKeys(
     BLEData = [...BLEData, tempObj];
   }
 
-  // getting the keys and values together in WIFI ------------------------------
+  // -----matching the keys and values together in WIFI ------------------------------
 
   for (let i = 0; i < filteredWIFI.length; i++) {
     let tempObj: any = {};
@@ -83,6 +83,7 @@ export const filterDataSet = (list: Array<any>, dataset: string) => {
   return alldatasetObj;
 };
 
+//------Function to filter the datasets to their selectors in the filter bar according to their values ------
 export const filterDataToSelect = (list: Array<any>) => {
   const numbersCheck = new RegExp(/^[(-9)-9.,]+$/);
   const lettersCheck = new RegExp(/^[a-zA-Z\s.,]+$/);

@@ -1,6 +1,6 @@
 
 
-
+//------Function to make random colors------
 
  export const getColors = (data:any) => {
 
