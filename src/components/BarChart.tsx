@@ -54,7 +54,7 @@ const BarChart = (props: BarChartProps) => {
       const ble = createChartData(dataBLEAndKey, Ydata, dataSet, labels);
       const wifiData = wifi.data
       const bleData = ble.data 
-      
+    
        if(isBleOrWifi){
         const selectedDS = wifi.dataSetList
         
@@ -88,11 +88,24 @@ const BarChart = (props: BarChartProps) => {
   }
 
   function handleDownloadToCSV(CSVdata: any) {
-    const dataTemp = wifiData.labels.map((year: any, i: number) => {
-      return { mam: wifiData.datasets[0].data[i], Year: year };
+    const datawifiTemp = wifiData.labels.map((time: any, i: number) => {
+      return {dataset: wifiData.datasets[i].data[i],timestamp: time };
     });
   // console.log(dataBLEAndKey)
-  
+  // const datawifidatasets = wifiData.datasets.map((dataset: any, i: number) => {
+  //   return {dataset: wifiData.datasets[0].data[i]};
+  // });
+
+  console.log(bleData)
+  console.log(wifiData)
+  const templist = datawifiTemp.map((obj: any, i: number) => {
+    return {
+      Timestamp: obj.timestamp,
+      dataset: obj.dataset,
+    };
+  });
+
+
  // console.log(theChartData)
     //  const dataTemp =  Object.keys(dataBLEAndKey).map((header:any, i: number) => {
     //   console.log(header+"header")
@@ -106,13 +119,7 @@ const BarChart = (props: BarChartProps) => {
     //   };
     // });
 
-    const templist = dataTemp.map((obj: any, i: number) => {
-      return {
-        Year: obj.Year,
-        MAM: obj.mam,
-      };
-    });
-
+    
     let csv = Papa.unparse(templist);
     const blob = new Blob([csv]);
     const a = document.createElement("a");
