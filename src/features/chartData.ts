@@ -18,9 +18,9 @@ const createChartData =  (someData : any,dataSetData:string,dataSet:string,label
     labels: labels.map((date:any) =>  ` ${date.hours}` + " " +
     `:0${date.minutes}:0${date.seconds}`),
     datasets: dataSetList.map((line: any,i:number) => {
-      // + " " + type + " "+ dataSetData
+      // + " "  + dataSetData
       return {
-        label: line.chosendataSet ,
+        label: line.chosendataSet + " " + type,
         data:  line.objArray.map((data: any) => data[`${dataSetData}`]),
         borderColor: backGroundColor.map((color: any) =>  color),
         backgroundColor: backGroundColor[i],

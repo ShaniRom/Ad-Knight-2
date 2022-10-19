@@ -35,7 +35,7 @@ const BarChart = (props: BarChartProps) => {
   const [dataSet, setDataSet] = useState("MAC_1")
   const [chosenDS , setChosenDateSet] = useState<any>([]);
   const [bleList,setBleList] = useState<any>([])
-  const [sifiList,setWifiList] = useState<any>([])
+  const [wifiList,setWifiList] = useState<any>([])
   const chartRef: any = useRef(null)
 
   const [selectedDS, setselectedDS] = useState<any>({})
@@ -87,23 +87,25 @@ const BarChart = (props: BarChartProps) => {
   }
 
   function handleDownloadToCSV(CSVdata: any) {
+    let list:any = []
     let datableTemp:any = []
-    bleList.forEach((obj: any, i: number) => {
-      
+    let ble  = ""
+    if(isBleOrWifi){ 
+      list = wifiList;
+    }else{
+      list = bleList;
+    }
+    list.forEach((obj: any, i: number) => { 
       obj.objArray.map((dataSetObj:any,i:number) => {
-        console.log(i + "index",obj.chosendataSet + "dataSet");
-        
         let tempObj:any = {}  
         tempObj = {lolo: obj.chosendataSet, lala: dataSetObj[`${Ydata}`] ,time : bleData.labels[i] };
         datableTemp = [...datableTemp,tempObj]
       })
       
     });
-
-  console.log(bleData)
-  console.log(wifiData)
   const templist = datableTemp.map((obj: any, i: number) => {
     return {
+      Ble: isBleOrWifi?"wifi":"ble",
       dataSet: obj.lolo,
       Ydata: obj.lala,
       TIME: obj.time
