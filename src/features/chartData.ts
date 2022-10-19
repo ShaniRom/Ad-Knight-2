@@ -11,14 +11,16 @@ const createChartData =  (someData : any,dataSetData:string,dataSet:string,label
   const type =someData[0].wifi_ble;
   const dataSetList =  filterDataSet(someData,dataSet);
   const backGroundColor = getColors(dataSetList);
+
+  
   
   const data = {
     labels: labels.map((date:any) =>  ` ${date.hours}` + " " +
     `:0${date.minutes}:0${date.seconds}`),
     datasets: dataSetList.map((line: any,i:number) => {
-
+      // + " " + type + " "+ dataSetData
       return {
-        label: line.chosendataSet + " " + type + " "+ dataSetData,
+        label: line.chosendataSet ,
         data:  line.objArray.map((data: any) => data[`${dataSetData}`]),
         borderColor: backGroundColor.map((color: any) =>  color),
         backgroundColor: backGroundColor[i],
@@ -26,9 +28,7 @@ const createChartData =  (someData : any,dataSetData:string,dataSet:string,label
       };
     }),
   }
-  
-  
-  
+
   return {data,dataSetList};
 
 }

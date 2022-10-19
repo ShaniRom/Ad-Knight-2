@@ -24,7 +24,7 @@ const BarChart = (props: BarChartProps) => {
 
   const { theChartData, dataWifiAndKey, dataBLEAndKey,dataAmount,setDataAmount,count,setCount } = props;
 
-  
+
   let [chartClicked, setChartClicked] = useState(false)
   const [isBleOrWifi, setisBleOrWifi] = useState(false)
   const [labels, setLabels] = useState([])
@@ -34,6 +34,8 @@ const BarChart = (props: BarChartProps) => {
   const [Ydata, setYdata] = useState("rssi_0")
   const [dataSet, setDataSet] = useState("MAC_1")
   const [chosenDS , setChosenDateSet] = useState<any>([]);
+  const [bleList,setBleList] = useState<any>([])
+  const [sifiList,setWifiList] = useState<any>([])
   const chartRef: any = useRef(null)
 
   const [selectedDS, setselectedDS] = useState<any>({})
@@ -54,7 +56,8 @@ const BarChart = (props: BarChartProps) => {
       const ble = createChartData(dataBLEAndKey, Ydata, dataSet, labels);
       const wifiData = wifi.data
       const bleData = ble.data 
-    
+      setBleList(ble.dataSetList)
+      setWifiList(wifi.dataSetList)
        if(isBleOrWifi){
         const selectedDS = wifi.dataSetList
         
@@ -64,10 +67,6 @@ const BarChart = (props: BarChartProps) => {
         
         setChosenDateSet(selectedDS)
       }
-      
- 
-     
-     
       setWifiData(wifiData);
       setBleData(bleData);
     }
@@ -88,20 +87,26 @@ const BarChart = (props: BarChartProps) => {
   }
 
   function handleDownloadToCSV(CSVdata: any) {
-    const datawifiTemp = wifiData.labels.map((time: any, i: number) => {
-      return {dataset: wifiData.datasets[i].data[i],timestamp: time };
+    let datableTemp:any = []
+    bleList.forEach((obj: any, i: number) => {
+      
+      obj.objArray.map((dataSetObj:any,i:number) => {
+        console.log(i + "index",obj.chosendataSet + "dataSet");
+        
+        let tempObj:any = {}  
+        tempObj = {lolo: obj.chosendataSet, lala: dataSetObj[`${Ydata}`] ,time : bleData.labels[i] };
+        datableTemp = [...datableTemp,tempObj]
+      })
+      
     });
-  // console.log(dataBLEAndKey)
-  // const datawifidatasets = wifiData.datasets.map((dataset: any, i: number) => {
-  //   return {dataset: wifiData.datasets[0].data[i]};
-  // });
 
   console.log(bleData)
   console.log(wifiData)
-  const templist = datawifiTemp.map((obj: any, i: number) => {
+  const templist = datableTemp.map((obj: any, i: number) => {
     return {
-      Timestamp: obj.timestamp,
-      dataset: obj.dataset,
+      dataSet: obj.lolo,
+      Ydata: obj.lala,
+      TIME: obj.time
     };
   });
 
