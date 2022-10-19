@@ -3,8 +3,8 @@ We made our final project with a start up, which requested a program that reads 
 
 In this project we used VITE, React, SCSS, Typescript and Node.
 The node libraries used:
-*papaparse
-*react-chartjs-2 v4
+- papaparse
+- react-chartjs-2 v4
 
 **How to Install and Run the Project-**
 You need to write in the terminal- npm i 
@@ -19,7 +19,7 @@ Then you choose by the side filter bar in what way you want to see your data, by
 On the right you see the datasets that you've chosen to see your data by, which is presented by color,id and by the y axios parameters like "rssi_0"
 There are two buttons on the bottom of the filter bar. One to turn the data that is presented on the chart into a CSV file, and another button that saves an image of the chart.
 
-######Made by-
+**Made by-
 Shani Rom, Ido Gino and Shay Foyer
 Students of INT college October 2021
-https://github.com/ShaniRom/Ad-Knight-2
+https://github.com/ShaniRom/Ad-Knight-2**
