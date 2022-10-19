@@ -14,8 +14,7 @@ interface ChangeChartDataProps {
   dataSet: string;
   setLabels: Function;
   setChoseOne: Function;
-  setWifiData: Function;
-  setBleData: Function;
+ 
   chosenDS: Array<any>;
   setDataAmount: Function;
   setselectedDS: any;
@@ -23,8 +22,7 @@ interface ChangeChartDataProps {
 
 function ChangeChartData(props: ChangeChartDataProps) {
   const {
-    setBleData,
-    setWifiData,
+   
     setDataSet,
     setYdata,
     isBleOrWifi,
