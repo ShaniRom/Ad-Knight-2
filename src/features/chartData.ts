@@ -40,6 +40,7 @@ const createChartData =  (someData : any,dataSetData:string,dataSet:string,label
     
 
     const data = {
+
       labels: labelsList.map((date:any) =>  ` ${date.hours}` + " " +
       `:0${date.minutes}:0${date.seconds}`),
 

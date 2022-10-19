@@ -1,3 +1,4 @@
+
 export function findTimeFrame(someData: any) {
   
   let timeList: any = [];
@@ -21,6 +22,7 @@ export function findTimeFrame(someData: any) {
       ) === i
     );
   });
-
+  console.log(timeRange);
+  
   return timeRange;
 }
