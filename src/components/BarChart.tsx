@@ -3,7 +3,7 @@ import Papa from "papaparse";
 // import CSVDownloader from "./CSVDownloader";
 import createChartData,{chosenLineChart} from "../features/chartData";
 import "../style/style.scss";
-import Table from "./Table";
+
 import ChangeChartData from "./ChangeChartData";
 import ChartDiv from "./Chart";
 
@@ -187,8 +187,6 @@ const BarChart = (props: BarChartProps) => {
   );
 };
 
-{
-  /* <Table chartClicked={chartClicked} chartData={chartData} keysOfObj={keysOfObj} /> */
-}
+
 
 export default BarChart;

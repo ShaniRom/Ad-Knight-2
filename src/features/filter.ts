@@ -1,4 +1,4 @@
-import { parse } from "papaparse";
+
 import getDate from "./getDate";
 
 export function filterData(dataSaved: any, keysBLE: any, keysWIFI: any) {
