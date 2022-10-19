@@ -24,8 +24,6 @@ const BarChart = (props: BarChartProps) => {
 
   const { theChartData, dataWifiAndKey, dataBLEAndKey,dataAmount,setDataAmount,count,setCount } = props;
 
-
-  let [chartClicked, setChartClicked] = useState(false)
   const [isBleOrWifi, setisBleOrWifi] = useState(false)
   const [labels, setLabels] = useState([])
   const [wifiData, setWifiData] = useState<any>(theChartData.wifiData)
@@ -73,19 +71,10 @@ const BarChart = (props: BarChartProps) => {
     
     
     
-  }, [Ydata, dataSet, isBleOrWifi, labels,selectedDS,count])
+  }, [Ydata, dataSet, isBleOrWifi, labels,selectedDS,count,dataAmount])
 
 
-  async function getChartData(index: any) {
-    let chartData;
-    // if(choseYears){
-    //  chartData=filteredData[index]
-    // }else{
-    //    chartData = CSVdata[index];
-    // }
-    // setChartData(chartData);
-  }
-
+ 
   function handleDownloadToCSV(CSVdata: any) {
     let list:any = []
     let datableTemp:any = []
@@ -113,18 +102,7 @@ const BarChart = (props: BarChartProps) => {
   });
 
 
- // console.log(theChartData)
-    //  const dataTemp =  Object.keys(dataBLEAndKey).map((header:any, i: number) => {
-    //   console.log(header+"header")
-    //   return {header};
-    // });
-    // const templist = dataBLEAndKey.map((obj: any, i: number) => {
-      
-    //     Object.keys(obj).map((header:any, i: number) => {
-    //         console.log(header+"header")
-    //         return {header}
-    //   };
-    // });
+ 
 
     
     let csv = Papa.unparse(templist);

@@ -15,7 +15,6 @@ function App() {
   const [dataAmount, setDataAmount] = useState<number>(0);
   const [allData, setAllData] = useState<any>([]);
   const [fileAdded, setFileAdded] = useState(false);
-  const [csvData, setCsvData] = useState<any>();
   let [theChartData, setTheChartData] = useState<any>();
   let [dataWifiAndKey, setdataWifiAndKey] = useState<any>([]);
   let [dataBLEAndKey, setdataBLEAndKey] = useState<any>([]);
