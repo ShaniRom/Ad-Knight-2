@@ -79,28 +79,37 @@ const BarChart = (props: BarChartProps) => {
  
   function handleDownloadToCSV(CSVdata: any) {
     let list:any = []
-    let datableTemp:any = []
-    let ble  = ""
+    let dataByType:any={}
+    let dataForCSV:any = []
+    
     if(isBleOrWifi){ 
       list = wifiList;
+      dataByType=wifiData
     }else{
       list = bleList;
+      dataByType=bleData
     }
-    console.log(bleList)
+    
     list.forEach((obj: any, i: number) => { 
       obj.objArray.map((dataSetObj:any,i:number) => {
         let tempObj:any = {}  
-        tempObj = {lolo: obj.chosendataSet, lala: dataSetObj[`${Ydata}`] ,time : bleData.labels[i] };
-        datableTemp = [...datableTemp,tempObj]
+        tempObj = {dataSet: obj.chosendataSet, yaxios: dataSetObj[`${Ydata}`] ,timestamp : dataByType.labels[i] };
+        dataForCSV = [...dataForCSV,tempObj]
       })
       
     });
-  const templist = datableTemp.map((obj: any, i: number) => {
+
+    console.log(dataForCSV)
+console.log(Ydata)
+console.log(dataSet)
+
+  const templist = dataForCSV.map((obj: any, i: number) => {
+   
     return {
       Ble: isBleOrWifi?"wifi":"ble",
-      dataSet: obj.lolo,
-      Ydata: obj.lala,
-      TIME: obj.time
+      dataSet: obj.dataSet,
+      Ydata: obj.yaxios,
+      TimeStamp: obj.timestamp
     };
   });
 

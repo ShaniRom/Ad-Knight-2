@@ -1,5 +1,5 @@
  
-  // -----Reading the unique timestamp from the csv and converting it to readable time  --------
+  // -----Reading the unix timestamp from the csv and converting it to readable time  --------
  const getDate = (unix_timestamp:number) => {
 
     
@@ -14,6 +14,6 @@
     const dateFound = {year,month,day,hours,minutes,seconds}
     
     return dateFound;
-    
+   
 }
 export default getDate

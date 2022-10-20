@@ -19,7 +19,7 @@ function Datasplit(props:DatasplitProps) {
     <>
     <form onSubmit={setdataAmount}>
     <label htmlFor="setAmount">set Amount of data :
-        <input name='setAmount' type="number" min={10} max={20000} required/>
+        <input name='setAmount' type="number" min={10} max={10000} required/>
             </label>
             <button type='submit'>submit</button>
             </form>
