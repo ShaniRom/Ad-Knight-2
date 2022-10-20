@@ -28,7 +28,7 @@ const BarChart = (props: BarChartProps) => {
   const [bleData, setBleData] = useState<any>(theChartData.bleData)
   const [choseOne,setChoseOne] = useState(false)
   const [Ydata, setYdata] = useState("rssi_0")
-  const [dataSet, setDataSet] = useState("MAC_1")
+  const [dataSet, setDataSet] = useState("event_id")
   const [chosenDS , setChosenDateSet] = useState<any>([]);
   const [bleList,setBleList] = useState<any>([])
   const [wifiList,setWifiList] = useState<any>([])
@@ -124,7 +124,7 @@ const BarChart = (props: BarChartProps) => {
     link.href = chartRef.current.toBase64Image("image/png", 1);
     link.click();
   }
-  
+
   //-----The button to switch between Ble and wifi --------
   async function changeDataType() {
     setisBleOrWifi(!isBleOrWifi);
