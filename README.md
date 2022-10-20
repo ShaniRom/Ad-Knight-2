@@ -20,6 +20,7 @@ On the right you see the datasets that you've chosen to see your data by, which 
 At the bottom of the chart there are scrolling options to see different pages by the amount youve chosen to see in each page.
 There are two buttons on the bottom of the filter bar. One to turn the data that is presented on the chart into a CSV file, and another button that saves an image of the chart.
 
+-If you want to change the data amount press submit and then press the submit on top of it that is in the timestamp filter.
 **Made by-
 Shani Rom, Ido Gino and Shay Foyer
 Students of INT college October 2021
