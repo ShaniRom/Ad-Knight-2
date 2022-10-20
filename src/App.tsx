@@ -96,13 +96,13 @@ function App() {
       const wifiData = createChartData(
         wifiList,
         "rssi_0",
-        "MAC_1",
+        "event_id",
         labelsListWifi
       );
       const bleData = createChartData(
         bleList,
         "rssi_0",
-        "MAC_1",
+        "event_id",
         labelsListBle
       );
       setTheChartData({ wifiData, bleData });
