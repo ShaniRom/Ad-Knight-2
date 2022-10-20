@@ -106,8 +106,8 @@ console.log(dataSet)
   const templist = dataForCSV.map((obj: any, i: number) => {
    
     return {
-      Ble: isBleOrWifi?"wifi":"ble",
-      dataSet: obj.dataSet,
+      Type: isBleOrWifi?"WIFI":"BLE",
+      DataSet: obj.dataSet,
       Ydata: obj.yaxios,
       TimeStamp: obj.timestamp
     };
