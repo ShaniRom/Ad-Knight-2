@@ -1,9 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import Papa from "papaparse";
-// import CSVDownloader from "./CSVDownloader";
 import createChartData,{chosenLineChart} from "../features/chartData";
 import "../style/style.scss";
-
 import ChangeChartData from "./ChangeChartData";
 import ChartDiv from "./Chart";
 
@@ -38,8 +36,11 @@ const BarChart = (props: BarChartProps) => {
 
   const [selectedDS, setselectedDS] = useState<any>({})
 
+
+ //-----Presenting the chart either by the users single dataset choice or by the users filter presenting all the data   --------
   useEffect(() => {
     if(choseOne){
+      
       if(isBleOrWifi){
         const chosenDatasetLine = chosenLineChart(selectedDS,dataWifiAndKey,Ydata)
         setWifiData(chosenDatasetLine)
@@ -50,6 +51,7 @@ const BarChart = (props: BarChartProps) => {
         setChoseOne(false)
       }
     }else{
+     
       const wifi = createChartData(dataWifiAndKey, Ydata, dataSet, labels);
       const ble = createChartData(dataBLEAndKey, Ydata, dataSet, labels);
       const wifiData = wifi.data
@@ -84,6 +86,7 @@ const BarChart = (props: BarChartProps) => {
     }else{
       list = bleList;
     }
+    console.log(bleList)
     list.forEach((obj: any, i: number) => { 
       obj.objArray.map((dataSetObj:any,i:number) => {
         let tempObj:any = {}  
@@ -121,14 +124,14 @@ const BarChart = (props: BarChartProps) => {
     link.href = chartRef.current.toBase64Image("image/png", 1);
     link.click();
   }
-
-  async function changeBLE() {
+  
+  //-----The button to switch between Ble and wifi --------
+  async function changeDataType() {
     setisBleOrWifi(!isBleOrWifi);
   }
 
   return (
     <div className="main">
-      {/* <List bleData={bleData} wifiData={wifiData} isBleOrWifi={isBleOrWifi} /> */}
       <ChartDiv
         chartRef={chartRef}
         bleData={bleData}
@@ -140,9 +143,9 @@ const BarChart = (props: BarChartProps) => {
       />
       <div className="main_filterChart">
         <button
-          className="main_changeBLEbtn"
-          name="changeBLE"
-          onClick={changeBLE}
+          className="main_changeDataType"
+          name="changeDataType"
+          onClick={changeDataType}
         >
           {isBleOrWifi ? "BLE" : "WIFI"}
         </button>

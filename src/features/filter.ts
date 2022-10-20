@@ -1,6 +1,6 @@
 
 import getDate from "./getDate";
-
+  //-----Separating between the datat types  --------
 export function filterData(dataSaved: any, keysBLE: any, keysWIFI: any) {
   const filteredBLE = dataSaved.filter((objBLE: any) => {
     return objBLE[0] === "BLE";
@@ -25,7 +25,7 @@ function filterWithKeys(
   let wifiData: any = [];
   let BLEData: any = [];
 
-  // -----matching the keys and values together in BLE ----------------------------------------
+  // -----matching the keys and values together in BLE -------------------------
 
   for (let i = 0; i < filteredBLE.length; i++) {
     let tempObj: any = {};
@@ -41,7 +41,7 @@ function filterWithKeys(
     BLEData = [...BLEData, tempObj];
   }
 
-  // -----matching the keys and values together in WIFI ------------------------------
+  // -----matching the keys and values together in WIFI ----------------------------
 
   for (let i = 0; i < filteredWIFI.length; i++) {
     let tempObj: any = {};
@@ -62,6 +62,7 @@ function filterWithKeys(
 
 
 
+  // -----Filtering all the values for the specific dataset chosen to present the line --------
 export const filterDataSet = (list: Array<any>, dataset: string) => {
   let datasetList: any = [];
 
@@ -80,6 +81,7 @@ export const filterDataSet = (list: Array<any>, dataset: string) => {
     };
     alldatasetObj = [...alldatasetObj, tempObj];
   });
+ 
   return alldatasetObj;
 };
 

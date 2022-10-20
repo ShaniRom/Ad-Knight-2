@@ -8,8 +8,7 @@ import Papa from "papaparse";
 import { filterData } from "./features/filter";
 import createChartData from "./features/chartData";
 
-// import { FileHandle } from "fs/promises";
-const allowedExtensions = ["csv"];
+
 
 function App() {
   const [dataAmount, setDataAmount] = useState<number>(0);
@@ -20,21 +19,26 @@ function App() {
   let [dataBLEAndKey, setdataBLEAndKey] = useState<any>([]);
   const [count, setCount] = useState(0);
 
-  useEffect(() => {
 
+   //-----Scrolling through the data amount user chose --------
+  useEffect(() => {
+    
     if (dataAmount !== 0 && count === 0) {
       const newData = allData.slice(0, dataAmount);
       const { tempWifi, tempBLE } = handleFilterHeaders(event_mapping);
       const amountChanged = true;
-      setchartdata(newData, tempWifi, tempBLE, amountChanged);
+      setChartData(newData, tempWifi, tempBLE, amountChanged);
     } else if (dataAmount !== 0 && count !== 0) {
       const newData = allData.slice(dataAmount * count,dataAmount * (count + 1));
       const { tempWifi, tempBLE } = handleFilterHeaders(event_mapping);
       const amountChanged = true;
-      setchartdata(newData, tempWifi, tempBLE, amountChanged);
+      setChartData(newData, tempWifi, tempBLE, amountChanged);
       
     }
   }, [dataAmount, count]);
+
+
+  // -----Filtering the headers from event_mapping version 0.8.5 and making sure its in the original order, by index instead of alphabetical --------------
 
  function handleFilterHeaders(event_mapping: any) {
     const tempWifi: any = [];
@@ -69,10 +73,10 @@ function App() {
     const newData: Array<ObjectModel> = data.slice(0, 4999);
     const { tempWifi, tempBLE } = handleFilterHeaders(event_mapping);
     const amountChanged = false;
-    setchartdata(newData, tempWifi, tempBLE, amountChanged);
+    setChartData(newData, tempWifi, tempBLE, amountChanged);
   }
 
-  function setchartdata(
+  function setChartData(
     newData: Array<any>,
     tempWifi: Array<any>,
     tempBLE: Array<any>,

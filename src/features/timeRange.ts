@@ -1,4 +1,4 @@
-
+  // -----Filtering by the time frame the user chose  --------
 export function findTimeFrame(someData: any) {
   
   let timeList: any = [];

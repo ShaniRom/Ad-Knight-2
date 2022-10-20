@@ -4,7 +4,7 @@ import {findTimeFrame} from './timeRange';
 import ObjectModel from "../models/ObjectModelBLE";
 
 
-
+  //-----Creating the chart by the users  filtering choices  --------
 const createChartData =  (someData : any,dataSetData:string,dataSet:string,labels:Array<number>) => {
 
   
@@ -18,9 +18,9 @@ const createChartData =  (someData : any,dataSetData:string,dataSet:string,label
     labels: labels.map((date:any) =>  ` ${date.hours}` + " " +
     `:0${date.minutes}:0${date.seconds}`),
     datasets: dataSetList.map((line: any,i:number) => {
-      // + " "  + dataSetData
+     
       return {
-        label: line.chosendataSet + " " + type,
+        label: line.chosendataSet + " " + type+  " "  + dataSetData,
         data:  line.objArray.map((data: any) => data[`${dataSetData}`]),
         borderColor: backGroundColor.map((color: any) =>  color),
         backgroundColor: backGroundColor[i],
@@ -33,7 +33,7 @@ const createChartData =  (someData : any,dataSetData:string,dataSet:string,label
 
 }
 
-
+  //-----Default chart when first opening while each filter is chosen  --------
   export const defaultChartData = (someData : Array<ObjectModel>) => {
 
     const labelsList =  findTimeFrame(someData);
@@ -59,18 +59,20 @@ const createChartData =  (someData : any,dataSetData:string,dataSet:string,label
   }
 
 
-
+  //-----Presenting the chart by the single dataset line id chosen   --------
 export const chosenLineChart = (selectedDS:any,list:Array<any>,yData:string) => {
 
   const dataArray = selectedDS.objArray
   const dataSet = selectedDS.chosendataSet
   const labelsList =  findTimeFrame(list);
   
-  console.log(labelsList);
+  
   
       const data = {
+        
         labels: labelsList.map((date:any) =>  ` ${date.hours}` + " " +
         `:0${date.minutes}:0${date.seconds}`),
+        
         datasets:[{ 
             label: dataSet,
             data:  dataArray.map((data: any) => Number(data[`${yData}`])),
@@ -79,6 +81,7 @@ export const chosenLineChart = (selectedDS:any,list:Array<any>,yData:string) => 
             tension: 0.4
           }]
         }
+        
         return data;
       }
       
