@@ -165,7 +165,7 @@ function ChangeChartData(props: ChangeChartDataProps) {
       </form>
 
       <label
-        style={{ fontSize: 20, fontWeight: "bold" }}
+       
         htmlFor="chooseOneLine"
       >
         select which {dataSet} on chart:

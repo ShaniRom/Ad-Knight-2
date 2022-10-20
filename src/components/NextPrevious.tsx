@@ -24,9 +24,9 @@ function NextPrevious(props: NextPreviousProps) {
   }
 
   return (
-    <div className="buttons">
+    <div className="scrollingButtons">
       <button
-        className="buttons_previous"
+        className="scrollingButtons_previous"
         name="previous"
         type="button"
         onClick={scrollNextPreviousByAmount}
@@ -35,7 +35,7 @@ function NextPrevious(props: NextPreviousProps) {
       </button>
 
       <button
-        className="buttons_next"
+        className="scrollingButtons_next"
         name="next"
         type="button"
         onClick={scrollNextPreviousByAmount}
