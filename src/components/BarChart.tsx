@@ -106,9 +106,7 @@ const BarChart = (props: BarChartProps) => {
       });
     });
 
-    console.log(dataForCSV);
-    console.log(Ydata);
-    console.log(dataSet);
+ 
 
     const templist = dataForCSV.map((obj: any, i: number) => {
       
